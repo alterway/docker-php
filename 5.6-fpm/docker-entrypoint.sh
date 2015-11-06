@@ -1,0 +1,50 @@
+#!/bin/bash
+set -e
+
+#
+# set localtime
+if [ "$USER" = "root" ]; then
+    ln -sf /usr/share/zoneinfo/$LOCALTIME /etc/localtime
+fi
+
+#
+# functions
+
+function set_conf {
+    echo ''>$2; IFSO=$IFS; IFS=$(echo -en "\n\b")
+    for c in `printenv|grep $1`; do echo "`echo $c|cut -d "=" -f1|awk -F"$1" '{print $2}'` $3 `echo $c|cut -d "=" -f2`" >> $2; done;
+    IFS=$IFSO
+}
+
+#
+# PHP
+
+echo "date.timezone = \"${LOCALTIME}\"" >> $PHP_INI_DIR/conf.d/00-default.ini
+if [ "$PHP_php5enmod" != "" ]; then docker-php-ext-enable $PHP_php5enmod > /dev/null 2>&1; fi;
+set_conf "PHP__" "$PHP_INI_DIR/conf.d/40-user.ini" "="
+
+#
+# docker links
+
+# Set memcached server with link
+if [ -n "$PHP_MEMCACHED_PORT_11211_TCP_ADDR" ]; then
+    echo "session.save_handler = memcached" > $PHP_INI_DIR/conf.d/20-memcached.ini
+    echo "session.save_path = $PHP_MEMCACHED_PORT_11211_TCP_ADDR:$PHP_MEMCACHED_PORT_11211_TCP_PORT" >> $PHP_INI_DIR/conf.d/20-memcached.ini
+elif [ -f $PHP_INI_DIR/conf.d/20-memcached.ini ]; then
+    rm $PHP_INI_DIR/conf.d/20-memcached.ini
+fi
+
+# Set ssmtp server with link
+if [ -n "$SMTP_PORT_25_TCP_ADDR" ]; then
+    echo 'sendmail_path = /usr/sbin/ssmtp -t' >> $PHP_INI_DIR/conf.d/00-default.ini
+    sed -i "s/mailhub=.*/mailhub=$SMTP_PORT_25_TCP_ADDR:$SMTP_PORT_25_TCP_PORT/"  /etc/ssmtp/ssmtp.conf
+fi
+
+#
+# Run
+
+if [[ ! -z "$1" ]]; then
+    exec ${*}
+else
+    exec php-fpm
+fi
