@@ -51,7 +51,7 @@ fi
 
 # Set memcached session save handle
 if [ -n "$MEMCACHED" ]; then
-    if [ ! -f /usr/local/etc/php/conf.d/docker-php-ext-memcached.ini ]; then docker-php-ext-enable  memcached > /dev/null; fi
+    if [ ! -f $PHP_INI_DIR/conf.d/docker-php-ext-memcached.ini ]; then docker-php-ext-enable  memcached > /dev/null; fi
 
     IFSO=$IFS; IFS=' ' read -ra BACKENDS <<< "${MEMCACHED}"
     for BACKEND in "${BACKENDS[@]}"; do
