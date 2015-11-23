@@ -39,15 +39,14 @@ Example with docker-compose :
         PHP_php5enmod: 'mcrypt memcached mysqli opcache'
 
 Extensions available : `bcmath gd gmp intl ldap mbstring mcrypt memcached mongo mysql mysqli pcntl pdo_mysql redis soap zip xdebug`
+
 Extensions available php >= 5.5 : `opcache`
 
 ### Advanced Environment variables
 
 - `MEMCACHED` : Enable session.save_handler to memcached and set address list of memcached (Format `address:port address:port ...`)
 - `MEMCACHED_CONFIG`: Set options of memcached (default: `persistent=1&timeout=5&retry_interval=30`)
-- `SMTP` : set address list of mail server (Format `address:port address:port ...`)
-
-See [https://httpd.apache.org/docs/2.4/en/mod/core.html](https://httpd.apache.org/docs/2.4/en/mod/core.html) for more informations
+- `SMTP` : set address of mail server (Format `address:port`)
 
 Example with docker-compose :
 

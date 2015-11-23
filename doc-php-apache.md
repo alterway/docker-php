@@ -41,6 +41,7 @@ Example with docker-compose :
 
 
 Extensions available : `bcmath gd gmp intl ldap mbstring mcrypt memcached mongo mysql mysqli pcntl pdo_mysql redis soap zip xdebug`
+
 Extensions available php >= 5.5 : `opcache`
 
 ### Set your apache.conf
@@ -77,9 +78,8 @@ Modules default enabled :
 
 - `MEMCACHED` : Enable session.save_handler to memcached and set address list of memcached (Format `address:port address:port ...`)
 - `MEMCACHED_CONFIG`: Set options of memcached (default: `persistent=1&timeout=5&retry_interval=30`)
-- `SMTP` : set address list of mail server (Format `address:port address:port ...`)
+- `SMTP` : set address of mail server (Format `address:port`)
 
-See [https://httpd.apache.org/docs/2.4/en/mod/core.html](https://httpd.apache.org/docs/2.4/en/mod/core.html) for more informations
 
 Example with docker-compose :
 
