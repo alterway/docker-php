@@ -43,7 +43,6 @@ RUN apt-get update && \
     pecl install redis && \
     pecl install xdebug
 
-
 ENV LOCALTIME Europe/Paris
 ENV HTTPD_CONF_DIR /etc/apache2/conf-enabled/
 ENV HTTPD__DocumentRoot /var/www/html

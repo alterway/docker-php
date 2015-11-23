@@ -43,7 +43,6 @@ RUN apt-get update && \
     pecl install redis && \
     pecl install xdebug
 
-
 ENV LOCALTIME Europe/Paris
 
 RUN rm $PHP_INI_DIR/conf.d/docker-php-ext* && \
