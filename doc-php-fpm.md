@@ -38,7 +38,7 @@ Example with docker-compose :
     environment:
         PHP_php5enmod: 'mcrypt memcached mysqli opcache'
 
-Extensions available : `bcmath gd gmp intl ldap mbstring mcrypt memcached mongo mysql mysqli pcntl pdo_mysql redis soap zip`
+Extensions available : `bcmath gd gmp intl ldap mbstring mcrypt memcached mongo mysql mysqli pcntl pdo_mysql redis soap zip xdebug`
 Extensions available php >= 5.5 : `opcache`
 
 ### Advanced Environment variables
