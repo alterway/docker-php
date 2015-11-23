@@ -39,11 +39,10 @@ RUN apt-get update && \
     docker-php-ext-install zip && \
     docker-php-ext-install pcntl && \
     pecl install mongo && \
-    docker-php-ext-enable mongo && \
     pecl install memcached && \
-    docker-php-ext-enable memcached && \
     pecl install redis && \
-    docker-php-ext-enable redis
+    pecl install xdebug
+
 
 ENV LOCALTIME Europe/Paris
 ENV HTTPD_CONF_DIR /etc/apache2/conf-enabled/

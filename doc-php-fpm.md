@@ -2,8 +2,9 @@
 
 ## Version available
 
-- PHP-FPM 5.6 (docker tags: `5.6-fpm`) - `docker pull hub.alterway.fr/php:5.6-fpm`
-- PHP-FPM 5.4 (docker tags: `5.4-fpm`) - `docker pull hub.alterway.fr/php:5.4-fpm`
+- PHP-FPM 5.6 (docker tags: `5.6-fpm`) - `docker pull alterway/php:5.6-fpm`
+- PHP-FPM 5.5 (docker tags: `5.5-fpm`) - `docker pull alterway/php:5.5-fpm`
+- PHP-FPM 5.4 (docker tags: `5.4-fpm`) - `docker pull alterway/php:5.4-fpm`
 
 ## Presentation
 
@@ -37,14 +38,34 @@ Example with docker-compose :
     environment:
         PHP_php5enmod: 'mcrypt memcached mysqli opcache'
 
-Extensions available : `bcmath gd gmp intl ldap mbstring mcrypt memcached mongo mysql mysqli pcntl pdo_mysql redis soap zip opcache`
+Extensions available : `bcmath gd gmp intl ldap mbstring mcrypt memcached mongo mysql mysqli pcntl pdo_mysql redis soap zip`
+Extensions available php >= 5.5 : `opcache`
+
+### Advanced Environment variables
+
+- `MEMCACHED` : Enable session.save_handler to memcached and set address list of memcached (Format `address:port address:port ...`)
+- `MEMCACHED_CONFIG`: Set options of memcached (default: `persistent=1&timeout=5&retry_interval=30`)
+- `SMTP` : set address list of mail server (Format `address:port address:port ...`)
+
+See [https://httpd.apache.org/docs/2.4/en/mod/core.html](https://httpd.apache.org/docs/2.4/en/mod/core.html) for more informations
+
+Example with docker-compose :
+
+    ...
+    environment:  
+       MEMCACHED:                      'memcached_1:11211 memcached_2:11211'
+       MEMCACHED_CONFIG:               'timeout=5&retry_interval=60'
+       SMTP:                           'mailcatcher_1:25'
+
 
 ## Use docker links
+
+### [DEPRECATED] Future versions of Docker will not support links - you should remove them for forwards-compatibility.
 
 Set link with alias :
 
 - `smtp` : set ssmtp configuration
-- `php_memcached` : set php session.save_handler to memcached (use PHP_MEMCACHED_PORT_11211_TCP_ADDR and PHP_MEMCACHED_PORT_11211_TCP_PORT
+- `php_memcached` : set php session.save_handler to memcached (use PHP_MEMCACHED_PORT_11211_TCP_ADDR and PHP_MEMCACHED_PORT_11211_TCP_PORT)
 
 ## Contributors
 
