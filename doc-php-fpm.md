@@ -5,6 +5,7 @@
 - PHP-FPM 5.6 (docker tags: `5.6-fpm`) - `docker pull alterway/php:5.6-fpm`
 - PHP-FPM 5.5 (docker tags: `5.5-fpm`) - `docker pull alterway/php:5.5-fpm`
 - PHP-FPM 5.4 (docker tags: `5.4-fpm`) - `docker pull alterway/php:5.4-fpm`
+- PHP-FPM 5.3.29 (docker tags: `5.3-fpm`) - `docker pull alterway/php:5.3-fpm` [DEPRECATED]
 
 ## Presentation
 
@@ -38,9 +39,10 @@ Example with docker-compose :
     environment:
         PHP_php5enmod: 'mcrypt memcached mysqli opcache'
 
-Extensions available : `bcmath gd gmp intl ldap mbstring mcrypt memcached mongo mysql mysqli pcntl pdo_mysql redis soap zip xdebug`
-
-Extensions available php >= 5.5 : `opcache`
+#### Extensions available
+- php >= 5.3 : `bcmath gd gmp intl ldap mbstring mcrypt memcached mongo mysql mysqli pcntl pdo_mysql redis soap zip`
+- php >= 5.4 : `xdebug`
+- php >= 5.5 : `opcache`
 
 ### Advanced Environment variables
 
