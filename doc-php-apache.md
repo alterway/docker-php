@@ -2,9 +2,10 @@
 
 ## Version available
 
-- Apache/2.4 - PHP/5.6 (docker tags: `5.6-apache`) - `docker pull hub.alterway.fr/php:5.6-apache`
-- Apache/2.4 - PHP/5.5 (docker tags: `5.5-apache`) - `docker pull hub.alterway.fr/php:5.5-apache`
-- Apache/2.4 - PHP/5.4 (docker tags: `5.4-apache`) - `docker pull hub.alterway.fr/php:5.4-apache`
+- Apache/2.4 - PHP/5.6 (docker tags: `5.6-apache`) - `docker pull alterway/php:5.6-apache`
+- Apache/2.4 - PHP/5.5 (docker tags: `5.5-apache`) - `docker pull alterway/php:5.5-apache`
+- Apache/2.4 - PHP/5.4 (docker tags: `5.4-apache`) - `docker pull alterway/php:5.4-apache`
+- Apache/2.2 - PHP/5.3.29 (docker tags: `5.3-apache`) - `docker pull alterway/php:5.3-apache` [DEPRECATED]
 
 ## Presentation
 
@@ -39,7 +40,12 @@ Example with docker-compose :
     environment:
         PHP_php5enmod: 'mcrypt memcached mysqli opcache'
 
-Extensions available : `bcmath gd gmp intl ldap mbstring mcrypt memcached mongo mysql mysqli pcntl pdo_mysql redis soap zip opcache`
+
+#### Extensions available
+- php >= 5.3 : `bcmath gd gmp intl ldap mbstring mcrypt memcached mongo mysql mysqli pcntl pdo_mysql redis soap zip`
+- php >= 5.4 : `xdebug`
+- php >= 5.5 : `opcache`
+
 
 ### Set your apache.conf
 
@@ -71,8 +77,25 @@ Modules default enabled :
 
     access_compat alias auth_basic authn_core authn_file authz_core authz_host authz_user autoindex deflate dir env filter mime mpm_prefork negotiation php5 rewrite setenvif status
 
+### Advanced Environment variables
+
+- `MEMCACHED` : Enable session.save_handler to memcached and set address list of memcached (Format `address:port address:port ...`)
+- `MEMCACHED_CONFIG`: Set options of memcached (default: `persistent=1&timeout=5&retry_interval=30`)
+- `SMTP` : set address of mail server (Format `address:port`)
+
+
+Example with docker-compose :
+
+    ...
+    environment:  
+       MEMCACHED:                      'memcached_1:11211 memcached_2:11211'
+       MEMCACHED_CONFIG:               'timeout=5&retry_interval=60'
+       SMTP:                           'mailcatcher_1:25'
+
 
 ## Use docker links
+
+### [DEPRECATED] Future versions of Docker will not support links - you should remove them for forwards-compatibility.
 
 Set link with alias :
 
