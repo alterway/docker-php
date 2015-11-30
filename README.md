@@ -2,6 +2,13 @@
 
 ## Version available
 
+### PHP-CLI
+
+Please see [README-php-cli.md](doc-php-cli.md)
+ 
+- PHP-FPM 5.6 (docker tags: `5.6-cli`) - `docker pull alterway/php:5.6-cli`
+- PHP-FPM 5.5 (docker tags: `5.5-cli`) - `docker pull alterway/php:5.5-cli`
+
 ### PHP-FPM
 
 Please see [README-php-fpm.md](doc-php-fpm.md)
