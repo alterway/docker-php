@@ -7,82 +7,26 @@ variables:
 before_script:
   - if [[ "$CI_BUILD_REF_NAME" != master ]]; then REGISTRY="$REGISTRY/$CI_BUILD_REF_NAME"; fi
 
-5.6-fpm:
+build:
   stage: build
   script:
-    - docker build --pull  -t $REGISTRY/php:5.6-fpm 5.6-fpm/
-    - docker push $REGISTRY/php:5.6-fpm
-  only:
-    - preprod
-    - master
-
-5.6-cli:
-  stage: build
-  script:
+    - docker build --pull -t $REGISTRY/php:5.6-fpm 5.6-fpm/
     - docker build --pull -t $REGISTRY/php:5.6-cli 5.6-cli/
-    - docker push $REGISTRY/php:5.6-cli
-  only:
-    - preprod
-    - master
-
-5.6-apache:
-  stage: build
-  script:
     - docker build --pull -t $REGISTRY/php:5.6-apache 5.6-apache/
-    - docker push $REGISTRY/php:5.6-apache
-  only:
-    - preprod
-    - master
-
-5.5-fpm:
-  stage: build
-  script:
     - docker build --pull -t $REGISTRY/php:5.5-fpm 5.5-fpm/
-    - docker push $REGISTRY/php:5.5-fpm
-  only:
-    - preprod
-    - master
-
-5.5-cli:
-  stage: build
-  script:
     - docker build --pull -t $REGISTRY/php:5.5-cli 5.5-cli/
-    - docker push $REGISTRY/php:5.5-cli
-  only:
-    - preprod
-    - master
-
-5.5-apache:
-  stage: build
-  script:
     - docker build --pull -t $REGISTRY/php:5.5-apache 5.5-apache/
-    - docker push $REGISTRY/php:5.5-apache
-  only:
-    - preprod
-    - master
-
-5.4-fpm:
-  stage: build
-  script:
     - docker build --pull -t $REGISTRY/php:5.4-fpm 5.4-fpm/
-    - docker push $REGISTRY/php:5.4-fpm
-  only:
-    - preprod
-    - master
-
-5.4-cli:
-  stage: build
-  script:
     - docker build --pull -t $REGISTRY/php:5.4-cli 5.4-cli/
-    - docker push $REGISTRY/php:5.4-cli
-  only:
-    - preprod
-    - master
-
-5.4-apache:
-  stage: build
-  script:
     - docker build --pull -t $REGISTRY/php:5.4-apache 5.4-apache/
+    - docker push $REGISTRY/php:5.6-fpm
+    - docker push $REGISTRY/php:5.6-cli
+    - docker push $REGISTRY/php:5.6-apache
+    - docker push $REGISTRY/php:5.5-fpm
+    - docker push $REGISTRY/php:5.5-cli
+    - docker push $REGISTRY/php:5.5-apache
+    - docker push $REGISTRY/php:5.4-fpm
+    - docker push $REGISTRY/php:5.4-cli
     - docker push $REGISTRY/php:5.4-apache
   only:
     - preprod
