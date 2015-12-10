@@ -52,6 +52,14 @@ RUN rm $PHP_INI_DIR/conf.d/docker-php-ext* && \
     sed -i "s/DocumentRoot.*/DocumentRoot \${HTTPD__DocumentRoot}/"  /etc/apache2/apache2.conf && \
     echo 'ServerName ${HOSTNAME}' > $HTTPD_CONF_DIR/00-default.conf
 
+
+ADD https://blackfire.io/api/v1/releases/probe/php/linux/amd64/55 /tmp/blackfire-probe.tar.gz
+
+RUN tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp && \
+    mv /tmp/blackfire-*.so `php -r "echo ini_get('extension_dir');"`/blackfire.so && \
+    rm /tmp/blackfire-probe.tar.gz
+
+
 COPY docker-entrypoint.sh /entrypoint.sh
 
 WORKDIR /var/www

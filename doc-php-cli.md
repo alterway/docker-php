@@ -47,13 +47,14 @@ Example with docker-compose :
         PHP_php5enmod: 'mcrypt memcached mysqli opcache'
 
 #### Extensions available
-- php >= 5.5 : `bcmath gd gmp intl ldap mbstring mcrypt memcached mongo mysql mysqli pcntl pdo_mysql redis soap zip`
+- php >= 5.3 : `bcmath gd gmp intl ldap mbstring mcrypt memcached mongo mysql mysqli pcntl pdo_mysql redis soap zip blackfire`
 
 ### Advanced Environment variables
 
 - `MEMCACHED` : Enable session.save_handler to memcached and set address list of memcached (Format `address:port address:port ...`)
 - `MEMCACHED_CONFIG`: Set options of memcached (default: `persistent=1&timeout=5&retry_interval=30`)
 - `SMTP` : set address of mail server (Format `address:port`)
+- `PHP__blackfire.agent_socket` : set address of blackfire agent (Format `tcp://address:port`)
 
 Example with docker-compose :
 
@@ -62,6 +63,7 @@ Example with docker-compose :
        MEMCACHED:                      'memcached_1:11211 memcached_2:11211'
        MEMCACHED_CONFIG:               'timeout=5&retry_interval=60'
        SMTP:                           'mailcatcher_1:25'
+       PHP__blackfire.agent_socket:    'tcp://blackfire:8707'
 
 
 ## Use docker links [DEPRECATED]
