@@ -48,11 +48,11 @@ RUN tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp && \
     mv /tmp/blackfire-*.so `php -r "echo ini_get('extension_dir');"`/blackfire.so && \
     rm /tmp/blackfire-probe.tar.gz
 
-
 ENV LOCALTIME Europe/Paris
 
 RUN rm $PHP_INI_DIR/conf.d/docker-php-ext* && \
-    chmod a+rwx $PHP_INI_DIR/conf.d
+    chmod a+rwx $PHP_INI_DIR/conf.d && \
+    chmod a+rw /etc/ssmtp/ssmtp.conf
 
 COPY docker-entrypoint.sh /entrypoint.sh
 
