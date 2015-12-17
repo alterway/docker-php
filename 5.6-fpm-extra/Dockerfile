@@ -8,5 +8,6 @@ RUN apt-get update && \
         curl \
         wget && \
     rm -rf /var/lib/apt/lists/* && \
+    chmod a+w -R $PHP_INI_DIR/conf.d/ && \
     wget https://getcomposer.org/download/1.0.0-alpha11/composer.phar -O /usr/local/bin/composer && \
     chmod a+rx /usr/local/bin/composer
