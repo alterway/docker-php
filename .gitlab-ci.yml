@@ -11,6 +11,7 @@ build:
   stage: build
   script:
     - docker build --pull -t $REGISTRY/php:5.6-fpm 5.6-fpm/
+    - docker build --pull -t $REGISTRY/php:5.6-fpm-extra 5.6-fpm-extra/
     - docker build --pull -t $REGISTRY/php:5.6-cli 5.6-cli/
     - docker build --pull -t $REGISTRY/php:5.6-apache 5.6-apache/
     - docker build --pull -t $REGISTRY/php:5.5-fpm 5.5-fpm/
@@ -20,6 +21,7 @@ build:
     - docker build --pull -t $REGISTRY/php:5.4-cli 5.4-cli/
     - docker build --pull -t $REGISTRY/php:5.4-apache 5.4-apache/
     - docker push $REGISTRY/php:5.6-fpm
+    - docker push $REGISTRY/php:5.6-fpm-extra
     - docker push $REGISTRY/php:5.6-cli
     - docker push $REGISTRY/php:5.6-apache
     - docker push $REGISTRY/php:5.5-fpm
