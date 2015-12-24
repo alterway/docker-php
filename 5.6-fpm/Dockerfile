@@ -62,3 +62,4 @@ COPY docker-entrypoint.sh /entrypoint.sh
 WORKDIR /var/www
 
 ENTRYPOINT ["/entrypoint.sh"]
+CMD ["php-fpm"]
