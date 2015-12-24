@@ -66,9 +66,4 @@ fi
 
 #
 # Run
-
-if [[ ! -z "$1" ]]; then
-    exec ${*}
-else
-    exec php-fpm
-fi
+${*}
