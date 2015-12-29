@@ -4,7 +4,7 @@
 
 - Apache/2.4 - PHP/5.6 (docker tags: `5.6-apache`) - `docker pull alterway/php:5.6-apache`
 - Apache/2.4 - PHP/5.5 (docker tags: `5.5-apache`) - `docker pull alterway/php:5.5-apache`
-- Apache/2.4 - PHP/5.4 (docker tags: `5.4-apache`) - `docker pull alterway/php:5.4-apache`
+- Apache/2.4 - PHP/5.4 (docker tags: `5.4-apache`) - `docker pull alterway/php:5.4-apache` [DEPRECATED]
 - Apache/2.2 - PHP/5.3.29 (docker tags: `5.3-apache`) - `docker pull alterway/php:5.3-apache` [DEPRECATED]
 
 ## Presentation
