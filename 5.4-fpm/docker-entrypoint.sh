@@ -21,7 +21,12 @@ function set_conf {
 
 echo "date.timezone = \"${LOCALTIME}\"" >> $PHP_INI_DIR/conf.d/00-default.ini
 if [ "$PHP_php5enmod" != "" ]; then docker-php-ext-enable $PHP_php5enmod > /dev/null 2>&1; fi;
+
+# Set php.ini
 set_conf "PHP__" "$PHP_INI_DIR/conf.d/40-user.ini" "="
+
+# Set phpfpm.conf
+set_conf "PHPFPM__" "/usr/local/etc/php-fpm.d/40-user.conf" "="
 
 #
 # docker links

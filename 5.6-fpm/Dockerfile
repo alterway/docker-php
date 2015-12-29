@@ -43,19 +43,17 @@ RUN apt-get update && \
     pecl install redis && \
     pecl install xdebug
 
-
 ENV LOCALTIME Europe/Paris
 
 RUN rm $PHP_INI_DIR/conf.d/docker-php-ext* && \
-    echo 'sendmail_path = /usr/sbin/ssmtp -t' >> $PHP_INI_DIR/conf.d/00-default.ini
-
+    echo 'sendmail_path = /usr/sbin/ssmtp -t' >> $PHP_INI_DIR/conf.d/00-default.ini && \
+    echo "\ninclude=/usr/local/etc/php-fpm.d/*.conf" >> /usr/local/etc/php-fpm.conf && \
+    mkdir -p /usr/local/etc/php-fpm.d
 
 ADD https://blackfire.io/api/v1/releases/probe/php/linux/amd64/56 /tmp/blackfire-probe.tar.gz
-
 RUN tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp && \
     mv /tmp/blackfire-*.so `php -r "echo ini_get('extension_dir');"`/blackfire.so && \
     rm /tmp/blackfire-probe.tar.gz
-
 
 COPY docker-entrypoint.sh /entrypoint.sh
 
