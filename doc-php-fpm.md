@@ -5,6 +5,7 @@
 - PHP-FPM 5.6 (docker tags: `5.6-fpm`) - `docker pull alterway/php:5.6-fpm`
 - PHP-FPM 5.6 with extra-packages (docker tags: `5.6-fpm-extra`) - `docker pull alterway/php:5.6-fpm-extra`
 - PHP-FPM 5.5 (docker tags: `5.5-fpm`) - `docker pull alterway/php:5.5-fpm`
+- PHP-FPM 5.5 with extra-packages (docker tags: `5.5-fpm-extra`) - `docker pull alterway/php:5.5-fpm-extra`
 - PHP-FPM 5.4 (docker tags: `5.4-fpm`) - `docker pull alterway/php:5.4-fpm` [DEPRECATED]
 - PHP-FPM 5.3.29 (docker tags: `5.3-fpm`) - `docker pull alterway/php:5.3-fpm` [DEPRECATED]
 
@@ -85,9 +86,9 @@ Set link with alias :
 - `smtp` : set ssmtp configuration
 - `php_memcached` : set php session.save_handler to memcached (use PHP_MEMCACHED_PORT_11211_TCP_ADDR and PHP_MEMCACHED_PORT_11211_TCP_PORT)
 
-## PHP-FPM 5.6 with Extra-packages
+## PHP-FPM 5.x with Extra-packages
 
-This version is extend to `php:5.6-fpm`
+This version is extend to `php:5.x-fpm`
 
 Available packages : composer.phar (1.0.0-alpha11), curl, wget, git, subversion, mysql-client
 
