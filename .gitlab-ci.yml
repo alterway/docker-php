@@ -19,6 +19,7 @@ build:
     - docker build --pull -t $REGISTRY/php:5.5-cli 5.5-cli/
     - docker build --pull -t $REGISTRY/php:5.5-apache 5.5-apache/
     - docker build --pull -t $REGISTRY/php:5.4-fpm 5.4-fpm/
+    - docker build -t $REGISTRY/php:5.4-fpm-extra 5.4-fpm-extra/
     - docker build --pull -t $REGISTRY/php:5.4-cli 5.4-cli/
     - docker build --pull -t $REGISTRY/php:5.4-apache 5.4-apache/
     - docker build --pull -t $REGISTRY/php:5.3-fpm 5.3-fpm/
@@ -32,6 +33,7 @@ build:
     - docker push $REGISTRY/php:5.5-cli
     - docker push $REGISTRY/php:5.5-apache
     - docker push $REGISTRY/php:5.4-fpm
+    - docker push $REGISTRY/php:5.4-fpm-extra
     - docker push $REGISTRY/php:5.4-cli
     - docker push $REGISTRY/php:5.4-apache
     - docker push $REGISTRY/php:5.3-fpm
