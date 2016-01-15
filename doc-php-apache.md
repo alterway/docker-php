@@ -42,7 +42,7 @@ Example with docker-compose :
 
 
 #### Extensions available
-- php >= 5.3 : `bcmath gd gmp intl ldap mbstring mcrypt memcached mongo mysql mysqli pcntl pdo_mysql redis soap zip blackfire`
+- php >= 5.3 : `bcmath gd gmp intl ldap mbstring mcrypt memcached mongo mysql mysqli pcntl pdo_mysql redis soap zip blackfire ftp sockets`
 - php >= 5.4 : `xdebug`
 - php >= 5.5 : `opcache`
 

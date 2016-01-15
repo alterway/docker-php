@@ -47,7 +47,7 @@ Example with docker-compose :
         PHP_php5enmod: 'mcrypt memcached mysqli opcache'
 
 #### Extensions available
-- php >= 5.3 : `bcmath gd gmp intl ldap mbstring mcrypt memcached mongo mysql mysqli pcntl pdo_mysql redis soap zip blackfire`
+- php >= 5.3 : `bcmath gd gmp intl ldap mbstring mcrypt memcached mongo mysql mysqli pcntl pdo_mysql redis soap zip blackfire ftp sockets`
 
 ### Advanced Environment variables
 
