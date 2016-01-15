@@ -89,7 +89,7 @@ RUN rm -rf /var/lib/apt/lists/* && \
     docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd && \
     docker-php-ext-configure mysql --with-mysql=mysqlnd && \
     docker-php-ext-configure mysqli --with-mysqli=mysqlnd && \
-    docker-php-ext-configure gd --with-jpeg-dir=/usr/lib && \
+    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/lib && \
     docker-php-ext-install pdo_mysql && \
     docker-php-ext-install mysqli && \
     docker-php-ext-install mysql && \
@@ -103,11 +103,19 @@ RUN rm -rf /var/lib/apt/lists/* && \
     docker-php-ext-install mbstring && \
     docker-php-ext-install zip && \
     docker-php-ext-install pcntl && \
+    docker-php-ext-install ftp && \
+    docker-php-ext-install socket && \
     pecl install mongo && \
     pecl install memcached-1.0.2 && \
     pecl install redis
 
+ADD https://blackfire.io/api/v1/releases/probe/php/linux/amd64/53 /tmp/blackfire-probe.tar.gz
+RUN tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp && \
+    mv /tmp/blackfire-*.so `php -r "echo ini_get('extension_dir');"`/blackfire.so && \
+    rm /tmp/blackfire-probe.tar.gz
+
 ENV LOCALTIME Europe/Paris
+
 ENV HTTPD_CONF_DIR /etc/apache2/conf-enabled/
 ENV HTTPD__DocumentRoot /var/www/html
 
@@ -119,14 +127,6 @@ RUN rm $PHP_INI_DIR/conf.d/docker-php-ext* && \
     echo 'sendmail_path = /usr/sbin/ssmtp -t' >> $PHP_INI_DIR/conf.d/00-default.ini && \
     sed -i "s/DocumentRoot.*/DocumentRoot \${HTTPD__DocumentRoot}/"  /etc/apache2/apache2.conf && \
     echo 'ServerName ${HOSTNAME}' > $HTTPD_CONF_DIR/00-default.conf
-
-
-ADD https://blackfire.io/api/v1/releases/probe/php/linux/amd64/53 /tmp/blackfire-probe.tar.gz
-
-RUN tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp && \
-    mv /tmp/blackfire-*.so `php -r "echo ini_get('extension_dir');"`/blackfire.so && \
-    rm /tmp/blackfire-probe.tar.gz
-
 
 COPY docker-entrypoint.sh /entrypoint.sh
 

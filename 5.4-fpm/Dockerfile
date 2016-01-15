@@ -25,7 +25,7 @@ RUN apt-get update && \
     docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd && \
     docker-php-ext-configure mysql --with-mysql=mysqlnd && \
     docker-php-ext-configure mysqli --with-mysqli=mysqlnd && \
-    docker-php-ext-configure gd --with-jpeg-dir=/usr/lib && \
+    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/lib && \
     docker-php-ext-install pdo_mysql && \
     docker-php-ext-install mysqli && \
     docker-php-ext-install mysql && \
@@ -39,10 +39,17 @@ RUN apt-get update && \
     docker-php-ext-install mbstring && \
     docker-php-ext-install zip && \
     docker-php-ext-install pcntl && \
+    docker-php-ext-install ftp && \
+    docker-php-ext-install sockets && \
     pecl install mongo && \
     pecl install memcached && \
     pecl install redis && \
     pecl install xdebug
+
+ADD https://blackfire.io/api/v1/releases/probe/php/linux/amd64/54 /tmp/blackfire-probe.tar.gz
+RUN tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp && \
+    mv /tmp/blackfire-*.so `php -r "echo ini_get('extension_dir');"`/blackfire.so && \
+    rm /tmp/blackfire-probe.tar.gz
 
 ENV LOCALTIME Europe/Paris
 
@@ -50,11 +57,6 @@ RUN rm $PHP_INI_DIR/conf.d/docker-php-ext* && \
     echo 'sendmail_path = /usr/sbin/ssmtp -t' >> $PHP_INI_DIR/conf.d/00-default.ini && \
     echo "\ninclude=/usr/local/etc/php-fpm.d/*.conf" >> /usr/local/etc/php-fpm.conf && \
     mkdir -p /usr/local/etc/php-fpm.d
-
-ADD https://blackfire.io/api/v1/releases/probe/php/linux/amd64/54 /tmp/blackfire-probe.tar.gz
-RUN tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp && \
-    mv /tmp/blackfire-*.so `php -r "echo ini_get('extension_dir');"`/blackfire.so && \
-    rm /tmp/blackfire-probe.tar.gz
 
 COPY docker-entrypoint.sh /entrypoint.sh
 

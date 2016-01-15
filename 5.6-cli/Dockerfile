@@ -25,7 +25,7 @@ RUN apt-get update && \
     docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd && \
     docker-php-ext-configure mysql --with-mysql=mysqlnd && \
     docker-php-ext-configure mysqli --with-mysqli=mysqlnd && \
-    docker-php-ext-configure gd --with-jpeg-dir=/usr/lib && \
+    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/lib && \
     docker-php-ext-install pdo_mysql && \
     docker-php-ext-install mysqli && \
     docker-php-ext-install mysql && \
@@ -39,6 +39,8 @@ RUN apt-get update && \
     docker-php-ext-install mbstring && \
     docker-php-ext-install zip && \
     docker-php-ext-install pcntl && \
+    docker-php-ext-install ftp && \
+    docker-php-ext-install sockets && \
     pecl install mongo && \
     pecl install memcached && \
     pecl install redis && \
