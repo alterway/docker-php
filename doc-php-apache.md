@@ -13,6 +13,7 @@ The entrypoint run `apache2` daemon by default and expose port 80.
 
 The default workdir is `/var/www/` and the default Apache DocumentRoot path is `/var/www/html`.
 
+Extra-packages available : composer, curl, wget, git, subversion, mysql-client
 
 ## Environment variables
 

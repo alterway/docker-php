@@ -3,9 +3,7 @@
 ## Version available
 
 - PHP-FPM 5.6 (docker tags: `5.6-fpm`) - `docker pull alterway/php:5.6-fpm`
-- PHP-FPM 5.6 with extra-packages (docker tags: `5.6-fpm-extra`) - `docker pull alterway/php:5.6-fpm-extra`
 - PHP-FPM 5.5 (docker tags: `5.5-fpm`) - `docker pull alterway/php:5.5-fpm`
-- PHP-FPM 5.5 with extra-packages (docker tags: `5.5-fpm-extra`) - `docker pull alterway/php:5.5-fpm-extra`
 - PHP-FPM 5.4 (docker tags: `5.4-fpm`) - `docker pull alterway/php:5.4-fpm` [DEPRECATED]
 - PHP-FPM 5.3.29 (docker tags: `5.3-fpm`) - `docker pull alterway/php:5.3-fpm` [DEPRECATED]
 
@@ -14,6 +12,8 @@
 The default workdir is `/var/www/`.
 
 The entrypoint start php-fpm and expose port `9000`
+
+Extra-packages available : composer, curl, wget, git, subversion, mysql-client
 
 ## Environment variables
 
@@ -48,16 +48,17 @@ Example with docker-compose :
 
 ### Set your php-fpm.conf
 
-The php-fpm configuration is dynamic. Just add environment variable with prefix `PHPFPM__`.
+The php-fpm configuration is dynamic. Just add environment variable with prefix : `PHPFPM__` and `PHPFPM_GLOBAL__`.
 
 Example with docker-compose :
     
      environment:
-        PHPFPM__pm: dynamic
-        PHPFPM__pm.max_children: 5
-        PHPFPM__pm.start_servers: 2
-        PHPFPM__pm.min_spare_servers: 1
-        PHPFPM__pm.max_spare_servers: 3
+        PHPFPM_GLOBAL__pm: dynamic
+        PHPFPM_GLOBAL__pm.max_children: 5
+        PHPFPM_GLOBAL__pm.start_servers: 2
+        PHPFPM_GLOBAL__pm.min_spare_servers: 1
+        PHPFPM_GLOBAL__pm.max_spare_servers: 3
+        PHPFPM__access.format '"%R - %u [%t] \"%m %r\" %s %l %Q %f"'
 
 
 ### Advanced Environment variables
@@ -85,12 +86,6 @@ Set link with alias :
 
 - `smtp` : set ssmtp configuration
 - `php_memcached` : set php session.save_handler to memcached (use PHP_MEMCACHED_PORT_11211_TCP_ADDR and PHP_MEMCACHED_PORT_11211_TCP_PORT)
-
-## PHP-FPM 5.x with Extra-packages
-
-This version is extend to `php:5.x-fpm`
-
-Available packages : composer.phar (1.0.0-alpha11), curl, wget, git, subversion, mysql-client
 
 ## Contributors
 

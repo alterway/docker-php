@@ -4,10 +4,20 @@
 
 - PHP 5.6 (docker tags: `5.6-cli`) - `docker pull alterway/php:5.6-cli`
 - PHP 5.5 (docker tags: `5.5-cli`) - `docker pull alterway/php:5.5-cli`
+- PHP 5.4 (docker tags: `5.4-cli`) - `docker pull alterway/php:5.4-cli`
+
+
+## Presentation
+
+The entrypoint run `php` command line
+
+The default workdir is `/var/www/` and the default Apache DocumentRoot path is `/var/www/html`.
+
+Extra-packages available : composer, curl, wget, git, subversion, mysql-client
 
 ## Usage
 
-    alterway/php:[tag] [options] [arguments]
+    hub.alterway.fr/php:[tag] [options] [arguments]
 
 ### Example
 

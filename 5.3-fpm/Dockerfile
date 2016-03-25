@@ -82,9 +82,16 @@ RUN apt-get update && \
         libssl-dev \
         php-pear \
         curl \
-        ssmtp && \
+        ssmtp \
+        mysql-client \
+        git \
+        subversion \
+        wget && \
     rm -rf /var/lib/apt/lists/* && \
-    docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
+    wget https://getcomposer.org/download/1.0.0-alpha11/composer.phar -O /usr/local/bin/composer && \
+    chmod a+rx /usr/local/bin/composer
+
+RUN docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
     docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd && \
     docker-php-ext-configure mysql --with-mysql=mysqlnd && \
     docker-php-ext-configure mysqli --with-mysqli=mysqlnd && \
@@ -109,6 +116,8 @@ RUN apt-get update && \
     pecl install redis
 
 ENV LOCALTIME Europe/Paris
+ENV PHPFPM__access.format '"%R - %u [%t] \"%m %r\" %s %l %Q %f"'
+
 
 RUN rm $PHP_INI_DIR/conf.d/docker-php-ext* && \
     echo 'sendmail_path = /usr/sbin/ssmtp -t' >> $PHP_INI_DIR/conf.d/00-default.ini && \

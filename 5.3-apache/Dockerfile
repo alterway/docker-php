@@ -82,10 +82,16 @@ RUN apt-get update && \
         libssl-dev \
         php-pear \
         curl \
-        ssmtp
+        ssmtp \
+        mysql-client \
+        git \
+        subversion \
+        wget && \
+    rm -rf /var/lib/apt/lists/* && \
+    wget https://getcomposer.org/download/1.0.0-alpha11/composer.phar -O /usr/local/bin/composer && \
+    chmod a+rx /usr/local/bin/composer
 
-RUN rm -rf /var/lib/apt/lists/* && \
-    docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
+RUN docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
     docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd && \
     docker-php-ext-configure mysql --with-mysql=mysqlnd && \
     docker-php-ext-configure mysqli --with-mysqli=mysqlnd && \
@@ -118,6 +124,7 @@ ENV LOCALTIME Europe/Paris
 
 ENV HTTPD_CONF_DIR /etc/apache2/conf-enabled/
 ENV HTTPD__DocumentRoot /var/www/html
+ENV HTTPD__LogFormat '"%a %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-agent}i\"" common'
 
 COPY apache2-foreground /usr/bin/apache2-foreground
 COPY apache2.conf /etc/apache2/apache2.conf

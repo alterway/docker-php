@@ -18,9 +18,16 @@ RUN apt-get update && \
         libssl-dev \
         php-pear \
         curl \
-        ssmtp && \
+        ssmtp \
+        mysql-client \
+        git \
+        subversion \
+        wget && \
     rm -rf /var/lib/apt/lists/* && \
-    ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h && \
+    wget https://getcomposer.org/download/1.0.0-alpha11/composer.phar -O /usr/local/bin/composer && \
+    chmod a+rx /usr/local/bin/composer
+
+RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h && \
     docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
     docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd && \
     docker-php-ext-configure mysql --with-mysql=mysqlnd && \
