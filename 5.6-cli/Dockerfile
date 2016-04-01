@@ -62,7 +62,8 @@ ENV LOCALTIME Europe/Paris
 
 RUN rm $PHP_INI_DIR/conf.d/docker-php-ext* && \
     chmod a+rwx $PHP_INI_DIR/conf.d && \
-    chmod a+rw /etc/ssmtp/ssmtp.conf
+    chmod a+rw /etc/ssmtp/ssmtp.conf && \
+    chmod a+w -R $PHP_INI_DIR/conf.d/ /etc/ssmtp
 
 COPY docker-entrypoint.sh /entrypoint.sh
 

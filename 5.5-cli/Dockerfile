@@ -61,7 +61,9 @@ RUN tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp && \
 ENV LOCALTIME Europe/Paris
 
 RUN rm $PHP_INI_DIR/conf.d/docker-php-ext* && \
-    echo 'sendmail_path = /usr/sbin/ssmtp -t' >> $PHP_INI_DIR/conf.d/00-default.ini
+    chmod a+rwx $PHP_INI_DIR/conf.d && \
+    chmod a+rw /etc/ssmtp/ssmtp.conf && \
+    chmod a+w -R $PHP_INI_DIR/conf.d/ /etc/ssmtp
 
 COPY docker-entrypoint.sh /entrypoint.sh
 
