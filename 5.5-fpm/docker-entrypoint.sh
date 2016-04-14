@@ -1,10 +1,14 @@
 #!/bin/bash
 set -e
 
-#
-# set localtime
+
 if [ "$USER" = "root" ]; then
+
+    # set localtime
     ln -sf /usr/share/zoneinfo/$LOCALTIME /etc/localtime
+
+    # secure path
+    chmod a-rwx -R $PHP_INI_DIR/conf.d/ /etc/ssmtp /usr/local/etc/php-fpm.d/
 fi
 
 #

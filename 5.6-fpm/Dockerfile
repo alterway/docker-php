@@ -65,7 +65,7 @@ RUN rm $PHP_INI_DIR/conf.d/docker-php-ext* && \
     echo 'sendmail_path = /usr/sbin/ssmtp -t' >> $PHP_INI_DIR/conf.d/00-default.ini && \
     echo "\ninclude=/usr/local/etc/php-fpm.d/*.conf" >> /usr/local/etc/php-fpm.conf && \
     mkdir -p /usr/local/etc/php-fpm.d && \
-    chmod a+w -R $PHP_INI_DIR/conf.d/ /etc/ssmtp /usr/local/etc/php-fpm.d
+    chmod a+w -R $PHP_INI_DIR/conf.d/ /etc/ssmtp /usr/local/etc/php-fpm.d/
 
 COPY docker-entrypoint.sh /entrypoint.sh
 

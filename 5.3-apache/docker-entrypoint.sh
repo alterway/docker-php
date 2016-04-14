@@ -1,10 +1,13 @@
 #!/bin/bash
 set -e
 
-#
-# set localtime
 if [ "$USER" = "root" ]; then
+
+    # set localtime
     ln -sf /usr/share/zoneinfo/$LOCALTIME /etc/localtime
+
+    # secure path
+    chmod a-rwx -R /etc/apache2/ $PHP_INI_DIR/ /etc/ssmtp
 fi
 
 #
