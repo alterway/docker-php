@@ -10,8 +10,6 @@ if [ "$USER" = "root" ]; then
     chmod a-rwx -R /etc/apache2/ $PHP_INI_DIR/ /etc/ssmtp
 fi
 
-/etc/apache2/mods-enabled $HTTPD_CONF_DIR/
-
 #
 # functions
 
