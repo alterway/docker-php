@@ -31,6 +31,7 @@ set_conf "PHP__" "$PHP_INI_DIR/conf.d/40-user.ini" "="
 # Set phpfpm.conf
 set_conf "PHPFPM_GLOBAL__" "/usr/local/etc/php-fpm.d/40-user-global.conf" "=" "[global]"
 set_conf "PHPFPM__" "/usr/local/etc/php-fpm.d/41-user-pool.conf" "=" "[www]"
+mv /usr/local/etc/php-fpm.d/www.conf /usr/local/etc/php-fpm.d/00-www.conf
 
 #
 # docker links
