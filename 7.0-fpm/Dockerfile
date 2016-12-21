@@ -1,4 +1,4 @@
-FROM php:7.0-cli
+FROM php:7.0-fpm
 MAINTAINER Alterway <iac@alterway.fr>
 
 RUN apt-get update && \
