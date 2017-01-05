@@ -88,7 +88,7 @@ RUN apt-get update && \
         subversion \
         wget && \
     rm -rf /var/lib/apt/lists/* && \
-    wget https://getcomposer.org/download/1.0.0-alpha11/composer.phar -O /usr/local/bin/composer && \
+    wget https://getcomposer.org/download/1.2.4/composer.phar -O /usr/local/bin/composer && \
     chmod a+rx /usr/local/bin/composer
 
 RUN docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
