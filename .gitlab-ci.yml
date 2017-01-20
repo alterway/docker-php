@@ -85,7 +85,7 @@ build:
     - docker push $REGISTRY/php:5.5-fpm-extra
     - docker tag $REGISTRY/php:5.4-fpm $REGISTRY/php:5.4-fpm-extra
     - docker push $REGISTRY/php:5.4-fpm-extra
-    - docker tag REGISTRY/php:5.3-fpm $REGISTRY/php:5.3-fpm-extra
+    - docker tag $REGISTRY/php:5.3-fpm $REGISTRY/php:5.3-fpm-extra
     - docker push $REGISTRY/php:5.3-fpm-extra
 
   only:
