@@ -51,7 +51,7 @@ RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h && \
     pecl install mongo && \
     pecl install memcached && \
     pecl install redis && \
-    pecl install xdebug
+    pecl install xdebug-2.4.1
 
 ADD https://blackfire.io/api/v1/releases/probe/php/linux/amd64/54 /tmp/blackfire-probe.tar.gz
 RUN tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp && \
