@@ -45,37 +45,37 @@ build:
 
     # tag library namespace
     - NAMESPACE=$REGISTRY/library
-    - docker tag -f $REGISTRY/php:7.1-fpm $NAMESPACE/php:7.1-fpm > /dev/null
+    - docker tag $REGISTRY/php:7.1-fpm $NAMESPACE/php:7.1-fpm > /dev/null
     - docker push $NAMESPACE/php:7.1-fpm > /dev/null
-    - docker tag -f $REGISTRY/php:7.1-apache $NAMESPACE/php:7.1-apache > /dev/null
+    - docker tag $REGISTRY/php:7.1-apache $NAMESPACE/php:7.1-apache > /dev/null
     - docker push $NAMESPACE/php:7.1-apache > /dev/null
-    - docker tag -f $REGISTRY/php:7.1-cli $NAMESPACE/php:7.1-cli > /dev/null
+    - docker tag $REGISTRY/php:7.1-cli $NAMESPACE/php:7.1-cli > /dev/null
     - docker push $NAMESPACE/php:7.1-cli > /dev/null
-    - docker tag -f $REGISTRY/php:7.0-fpm $NAMESPACE/php:7.0-fpm > /dev/null
+    - docker tag $REGISTRY/php:7.0-fpm $NAMESPACE/php:7.0-fpm > /dev/null
     - docker push $NAMESPACE/php:7.0-fpm > /dev/null
-    - docker tag -f $REGISTRY/php:7.0-apache $NAMESPACE/php:7.0-apache > /dev/null
+    - docker tag $REGISTRY/php:7.0-apache $NAMESPACE/php:7.0-apache > /dev/null
     - docker push $NAMESPACE/php:7.0-apache > /dev/null
-    - docker tag -f $REGISTRY/php:7.0-cli $NAMESPACE/php:7.0-cli > /dev/null
+    - docker tag $REGISTRY/php:7.0-cli $NAMESPACE/php:7.0-cli > /dev/null
     - docker push $NAMESPACE/php:7.0-cli > /dev/null
-    - docker tag -f $REGISTRY/php:5.6-fpm $NAMESPACE/php:5.6-fpm > /dev/null
+    - docker tag $REGISTRY/php:5.6-fpm $NAMESPACE/php:5.6-fpm > /dev/null
     - docker push $NAMESPACE/php:5.6-fpm > /dev/null
-    - docker tag -f $REGISTRY/php:5.6-apache $NAMESPACE/php:5.6-apache > /dev/null
+    - docker tag $REGISTRY/php:5.6-apache $NAMESPACE/php:5.6-apache > /dev/null
     - docker push $NAMESPACE/php:5.6-apache > /dev/null
-    - docker tag -f $REGISTRY/php:5.6-cli $NAMESPACE/php:5.6-cli > /dev/null
+    - docker tag $REGISTRY/php:5.6-cli $NAMESPACE/php:5.6-cli > /dev/null
     - docker push $NAMESPACE/php:5.6-cli > /dev/null
-    - docker tag -f $REGISTRY/php:5.5-fpm $NAMESPACE/php:5.5-fpm > /dev/null
+    - docker tag $REGISTRY/php:5.5-fpm $NAMESPACE/php:5.5-fpm > /dev/null
     - docker push $NAMESPACE/php:5.5-fpm > /dev/null
-    - docker tag -f $REGISTRY/php:5.5-apache $NAMESPACE/php:5.5-apache > /dev/null
+    - docker tag $REGISTRY/php:5.5-apache $NAMESPACE/php:5.5-apache > /dev/null
     - docker push $NAMESPACE/php:5.5-apache > /dev/null
-    - docker tag -f $REGISTRY/php:5.5-cli $NAMESPACE/php:5.5-cli > /dev/null
+    - docker tag $REGISTRY/php:5.5-cli $NAMESPACE/php:5.5-cli > /dev/null
     - docker push $NAMESPACE/php:5.5-cli > /dev/null
-    - docker tag -f $REGISTRY/php:5.4-fpm $NAMESPACE/php:5.4-fpm > /dev/null
+    - docker tag $REGISTRY/php:5.4-fpm $NAMESPACE/php:5.4-fpm > /dev/null
     - docker push $NAMESPACE/php:5.4-fpm > /dev/null
-    - docker tag -f $REGISTRY/php:5.4-apache $NAMESPACE/php:5.4-apache > /dev/null
+    - docker tag $REGISTRY/php:5.4-apache $NAMESPACE/php:5.4-apache > /dev/null
     - docker push $NAMESPACE/php:5.4-apache > /dev/null
-    - docker tag -f $REGISTRY/php:5.4-cli $NAMESPACE/php:5.4-cli > /dev/null
+    - docker tag $REGISTRY/php:5.4-cli $NAMESPACE/php:5.4-cli > /dev/null
     - docker push $NAMESPACE/php:5.4-cli > /dev/null
-    - docker tag -f $REGISTRY/php:5.3-fpm $NAMESPACE/php:5.3-fpm > /dev/null
+    - docker tag $REGISTRY/php:5.3-fpm $NAMESPACE/php:5.3-fpm > /dev/null
     - docker push $NAMESPACE/php:5.3-fpm > /dev/null
 
     # tags extra for old project.
