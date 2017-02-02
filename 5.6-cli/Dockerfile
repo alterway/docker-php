@@ -9,6 +9,7 @@ RUN apt-get update && \
         libpng12-dev \
         libgmp-dev \
         libxml2-dev \
+        libxslt-dev \
         zlib1g-dev \
         libncurses5-dev \
         libldap2-dev \
@@ -48,6 +49,7 @@ RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h && \
     docker-php-ext-install pcntl && \
     docker-php-ext-install ftp && \
     docker-php-ext-install sockets && \
+    docker-php-ext-install xsl && \
     pecl install mongo && \
     pecl install memcached && \
     pecl install redis && \
