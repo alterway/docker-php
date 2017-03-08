@@ -17,6 +17,7 @@ RUN apt-get update && \
         libmemcached-dev \
         libcurl4-openssl-dev \
         libssl-dev \
+        libsqlite3-dev \
         php-pear \
         curl \
         ssmtp \
@@ -37,6 +38,7 @@ RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h && \
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/lib && \
     docker-php-ext-install pdo_mysql && \
     docker-php-ext-install mysqli && \
+    docker-php-ext-install pdo_sqlite && \
     docker-php-ext-install ldap && \
     docker-php-ext-install soap && \
     docker-php-ext-install intl && \
@@ -50,6 +52,7 @@ RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h && \
     docker-php-ext-install ftp && \
     docker-php-ext-install sockets && \
     pecl install mongodb && \
+    pecl install memcached && \
     pecl install redis && \
     pecl install xdebug
 
@@ -67,7 +70,10 @@ RUN rm $PHP_INI_DIR/conf.d/docker-php-ext* && \
     echo 'sendmail_path = /usr/sbin/ssmtp -t' >> $PHP_INI_DIR/conf.d/00-default.ini && \
     sed -i "s/DocumentRoot.*/DocumentRoot \${HTTPD__DocumentRoot}/"  /etc/apache2/apache2.conf && \
     echo 'ServerName ${HOSTNAME}' > $HTTPD_CONF_DIR/00-default.conf && \
-    chmod a+w -R $HTTPD_CONF_DIR/ /etc/apache2/mods-enabled $PHP_INI_DIR/
+    echo 'ServerSignature Off' > /etc/apache2/conf-enabled/z-security.conf && \
+    echo 'ServerTokens Minimal' >> /etc/apache2/conf-enabled/z-security.conf && \
+    chmod a+w -R $HTTPD_CONF_DIR/ /etc/apache2/mods-enabled $PHP_INI_DIR/ && \
+    rm /etc/apache2/sites-enabled/000-default.conf
 
 COPY docker-entrypoint.sh /entrypoint.sh
 

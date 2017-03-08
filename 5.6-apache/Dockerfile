@@ -16,6 +16,7 @@ RUN apt-get update && \
         libmemcached-dev \
         libcurl4-openssl-dev \
         libssl-dev \
+        libsqlite3-dev \
         php-pear \
         curl \
         ssmtp \
@@ -36,6 +37,7 @@ RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h && \
     docker-php-ext-install mysql && \
     docker-php-ext-configure mysqli --with-mysqli=mysqlnd && \
     docker-php-ext-install mysqli && \
+    docker-php-ext-install pdo_sqlite && \
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/lib && \
     docker-php-ext-install gd && \
     docker-php-ext-install soap && \
@@ -49,7 +51,7 @@ RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h && \
     docker-php-ext-install ftp && \
     docker-php-ext-install sockets && \
     pecl install mongo && \
-    pecl install memcached && \
+    pecl install memcached-2.2.0 && \
     pecl install redis && \
     pecl install xdebug
 
