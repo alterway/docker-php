@@ -51,7 +51,7 @@ RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h && \
     docker-php-ext-install sockets && \
     docker-php-ext-install xsl && \
     pecl install mongo && \
-    pecl install memcached && \
+    pecl install memcached-2.2.0 && \
     pecl install redis && \
     pecl install xdebug
 

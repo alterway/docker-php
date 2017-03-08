@@ -50,6 +50,7 @@ RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h && \
     docker-php-ext-install ftp && \
     docker-php-ext-install sockets && \
     pecl install mongodb && \
+    pecl install memcached && \
     pecl install redis && \
     pecl install xdebug
 
