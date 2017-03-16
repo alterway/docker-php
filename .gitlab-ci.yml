@@ -8,6 +8,71 @@ before_script:
   - if [[ "$CI_BUILD_REF_NAME" != master ]]; then REGISTRY="$REGISTRY/$CI_BUILD_REF_NAME"; fi
   - NAMESPACE=$REGISTRY/library
 
+7.1-fpm:
+  stage: build
+  only:
+    - preprod
+    - master
+  script:
+    - docker build --pull -t $REGISTRY/php:7.1-fpm 7.1-fpm/ >> /dev/null
+    - docker push $REGISTRY/php:7.1-fpm > /dev/null
+    - docker tag $REGISTRY/php:7.1-fpm $NAMESPACE/php:7.1-fpm > /dev/null
+    - docker push $NAMESPACE/php:7.1-fpm > /dev/null
+
+7.1-apache:
+  stage: build
+  only:
+    - preprod
+    - master
+  script:
+    - docker build --pull -t $REGISTRY/php:7.1-apache 7.1-apache/ > /dev/null
+    - docker push $REGISTRY/php:7.1-apache > /dev/null
+    - docker tag $REGISTRY/php:7.1-apache $NAMESPACE/php:7.1-apache > /dev/null
+    - docker push $NAMESPACE/php:7.1-apache > /dev/null
+
+7.1-cli:
+  stage: build
+  only:
+    - preprod
+    - master
+  script:
+    - docker build --pull -t $REGISTRY/php:7.1-cli 7.1-cli/ > /dev/null
+    - docker push $REGISTRY/php:7.1-cli > /dev/null
+    - docker tag $REGISTRY/php:7.1-cli $NAMESPACE/php:7.1-cli > /dev/null
+    - docker push $NAMESPACE/php:7.1-cli > /dev/null
+
+7.0-fpm:
+  stage: build
+  only:
+    - preprod
+    - master
+  script:
+    - docker build --pull -t $REGISTRY/php:7.0-fpm 7.0-fpm/ >> /dev/null
+    - docker push $REGISTRY/php:7.0-fpm > /dev/null
+    - docker tag $REGISTRY/php:7.0-fpm $NAMESPACE/php:7.0-fpm > /dev/null
+    - docker push $NAMESPACE/php:7.0-fpm > /dev/null
+
+7.0-apache:
+  stage: build
+  only:
+    - preprod
+    - master
+  script:
+    - docker build --pull -t $REGISTRY/php:7.0-apache 7.0-apache/ > /dev/null
+    - docker push $REGISTRY/php:7.0-apache > /dev/null
+    - docker tag $REGISTRY/php:7.0-apache $NAMESPACE/php:7.0-apache > /dev/null
+    - docker push $NAMESPACE/php:7.0-apache > /dev/null
+
+7.0-cli:
+  stage: build
+  only:
+    - preprod
+    - master
+  script:
+    - docker build --pull -t $REGISTRY/php:7.0-cli 7.0-cli/ > /dev/null
+    - docker push $REGISTRY/php:7.0-cli > /dev/null
+    - docker tag $REGISTRY/php:7.0-cli $NAMESPACE/php:7.0-cli > /dev/null
+    - docker push $NAMESPACE/php:7.0-cli > /dev/null
 
 5.6-fpm:
   stage: build
@@ -44,163 +109,88 @@ before_script:
     - docker tag $REGISTRY/php:5.6-cli $NAMESPACE/php:5.6-cli > /dev/null
     - docker push $NAMESPACE/php:5.6-cli > /dev/null
 
+# 5.5-fpm:
+#   stage: build
+#   only:
+#     - preprod
+#     - master
+#   script:
+#     - docker build --pull -t $REGISTRY/php:5.5-fpm 5.5-fpm/ >> /dev/null
+#     - docker push $REGISTRY/php:5.5-fpm > /dev/null
+#     - docker tag $REGISTRY/php:5.5-fpm $NAMESPACE/php:5.5-fpm > /dev/null
+#     - docker push $NAMESPACE/php:5.5-fpm > /dev/null
+#     - docker tag $REGISTRY/php:5.5-fpm $REGISTRY/php:5.5-fpm-extra
+#     - docker push $REGISTRY/php:5.5-fpm-extra
 
+# 5.5-apache:
+#   stage: build
+#   only:
+#     - preprod
+#     - master
+#   script:
+#     - docker build --pull -t $REGISTRY/php:5.5-apache 5.5-apache/ > /dev/null
+#     - docker push $REGISTRY/php:5.5-apache > /dev/null
+#     - docker tag $REGISTRY/php:5.5-apache $NAMESPACE/php:5.5-apache > /dev/null
+#     - docker push $NAMESPACE/php:5.5-apache > /dev/null
 
-5.5-fpm:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:5.5-fpm 5.5-fpm/ >> /dev/null
-    - docker push $REGISTRY/php:5.5-fpm > /dev/null
-    - docker tag $REGISTRY/php:5.5-fpm $NAMESPACE/php:5.5-fpm > /dev/null
-    - docker push $NAMESPACE/php:5.5-fpm > /dev/null
-    - docker tag $REGISTRY/php:5.5-fpm $REGISTRY/php:5.5-fpm-extra
-    - docker push $REGISTRY/php:5.5-fpm-extra
-
-5.5-apache:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:5.5-apache 5.5-apache/ > /dev/null
-    - docker push $REGISTRY/php:5.5-apache > /dev/null
-    - docker tag $REGISTRY/php:5.5-apache $NAMESPACE/php:5.5-apache > /dev/null
-    - docker push $NAMESPACE/php:5.5-apache > /dev/null
-
-5.5-cli:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:5.5-cli 5.5-cli/ > /dev/null
-    - docker push $REGISTRY/php:5.5-cli > /dev/null
-    - docker tag $REGISTRY/php:5.5-cli $NAMESPACE/php:5.5-cli > /dev/null
-    - docker push $NAMESPACE/php:5.5-cli > /dev/null
-
-
-
-5.4-fpm:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:5.4-fpm 5.4-fpm/ >> /dev/null
-    - docker push $REGISTRY/php:5.4-fpm > /dev/null
-    - docker tag $REGISTRY/php:5.4-fpm $NAMESPACE/php:5.4-fpm > /dev/null
-    - docker push $NAMESPACE/php:5.4-fpm > /dev/null
-    - docker tag $REGISTRY/php:5.4-fpm $REGISTRY/php:5.4-fpm-extra
-    - docker push $REGISTRY/php:5.4-fpm-extra
-
-5.4-apache:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:5.4-apache 5.4-apache/ > /dev/null
-    - docker push $REGISTRY/php:5.4-apache > /dev/null
-    - docker tag $REGISTRY/php:5.4-apache $NAMESPACE/php:5.4-apache > /dev/null
-    - docker push $NAMESPACE/php:5.4-apache > /dev/null
-
-5.4-cli:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:5.4-cli 5.4-cli/ > /dev/null
-    - docker push $REGISTRY/php:5.4-cli > /dev/null
-    - docker tag $REGISTRY/php:5.4-cli $NAMESPACE/php:5.4-cli > /dev/null
-    - docker push $NAMESPACE/php:5.4-cli > /dev/null
-
-
-5.3-fpm:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:5.3-fpm 5.3-fpm/ > /dev/null
-    - docker push $REGISTRY/php:5.3-fpm > /dev/null
-    - docker tag $REGISTRY/php:5.3-fpm $NAMESPACE/php:5.3-fpm > /dev/null
-    - docker push $NAMESPACE/php:5.3-fpm > /dev/null
-    - docker tag $REGISTRY/php:5.3-fpm $REGISTRY/php:5.3-fpm-extra
-    - docker push $REGISTRY/php:5.3-fpm-extra
+# 5.5-cli:
+#   stage: build
+#   only:
+#     - preprod
+#     - master
+#   script:
+#     - docker build --pull -t $REGISTRY/php:5.5-cli 5.5-cli/ > /dev/null
+#     - docker push $REGISTRY/php:5.5-cli > /dev/null
+#     - docker tag $REGISTRY/php:5.5-cli $NAMESPACE/php:5.5-cli > /dev/null
+#     - docker push $NAMESPACE/php:5.5-cli > /dev/null
 
 
 
-7.0-fpm:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:7.0-fpm 7.0-fpm/ >> /dev/null
-    - docker push $REGISTRY/php:7.0-fpm > /dev/null
-    - docker tag $REGISTRY/php:7.0-fpm $NAMESPACE/php:7.0-fpm > /dev/null
-    - docker push $NAMESPACE/php:7.0-fpm > /dev/null
+# 5.4-fpm:
+#   stage: build
+#   only:
+#     - preprod
+#     - master
+#   script:
+#     - docker build --pull -t $REGISTRY/php:5.4-fpm 5.4-fpm/ >> /dev/null
+#     - docker push $REGISTRY/php:5.4-fpm > /dev/null
+#     - docker tag $REGISTRY/php:5.4-fpm $NAMESPACE/php:5.4-fpm > /dev/null
+#     - docker push $NAMESPACE/php:5.4-fpm > /dev/null
+#     - docker tag $REGISTRY/php:5.4-fpm $REGISTRY/php:5.4-fpm-extra
+#     - docker push $REGISTRY/php:5.4-fpm-extra
 
-7.0-apache:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:7.0-apache 7.0-apache/ > /dev/null
-    - docker push $REGISTRY/php:7.0-apache > /dev/null
-    - docker tag $REGISTRY/php:7.0-apache $NAMESPACE/php:7.0-apache > /dev/null
-    - docker push $NAMESPACE/php:7.0-apache > /dev/null
+# 5.4-apache:
+#   stage: build
+#   only:
+#     - preprod
+#     - master
+#   script:
+#     - docker build --pull -t $REGISTRY/php:5.4-apache 5.4-apache/ > /dev/null
+#     - docker push $REGISTRY/php:5.4-apache > /dev/null
+#     - docker tag $REGISTRY/php:5.4-apache $NAMESPACE/php:5.4-apache > /dev/null
+#     - docker push $NAMESPACE/php:5.4-apache > /dev/null
 
-7.0-cli:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:7.0-cli 7.0-cli/ > /dev/null
-    - docker push $REGISTRY/php:7.0-cli > /dev/null
-    - docker tag $REGISTRY/php:7.0-cli $NAMESPACE/php:7.0-cli > /dev/null
-    - docker push $NAMESPACE/php:7.0-cli > /dev/null
-
-
-
-7.1-fpm:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:7.1-fpm 7.1-fpm/ >> /dev/null
-    - docker push $REGISTRY/php:7.1-fpm > /dev/null
-    - docker tag $REGISTRY/php:7.1-fpm $NAMESPACE/php:7.1-fpm > /dev/null
-    - docker push $NAMESPACE/php:7.1-fpm > /dev/null
-
-7.1-apache:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:7.1-apache 7.1-apache/ > /dev/null
-    - docker push $REGISTRY/php:7.1-apache > /dev/null
-    - docker tag $REGISTRY/php:7.1-apache $NAMESPACE/php:7.1-apache > /dev/null
-    - docker push $NAMESPACE/php:7.1-apache > /dev/null
-
-7.1-cli:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:7.1-cli 7.1-cli/ > /dev/null
-    - docker push $REGISTRY/php:7.1-cli > /dev/null
-    - docker tag $REGISTRY/php:7.1-cli $NAMESPACE/php:7.1-cli > /dev/null
-    - docker push $NAMESPACE/php:7.1-cli > /dev/null
+# 5.4-cli:
+#   stage: build
+#   only:
+#     - preprod
+#     - master
+#   script:
+#     - docker build --pull -t $REGISTRY/php:5.4-cli 5.4-cli/ > /dev/null
+#     - docker push $REGISTRY/php:5.4-cli > /dev/null
+#     - docker tag $REGISTRY/php:5.4-cli $NAMESPACE/php:5.4-cli > /dev/null
+#     - docker push $NAMESPACE/php:5.4-cli > /dev/null
 
 
-
+# 5.3-fpm:
+#   stage: build
+#   only:
+#     - preprod
+#     - master
+#   script:
+#     - docker build --pull -t $REGISTRY/php:5.3-fpm 5.3-fpm/ > /dev/null
+#     - docker push $REGISTRY/php:5.3-fpm > /dev/null
+#     - docker tag $REGISTRY/php:5.3-fpm $NAMESPACE/php:5.3-fpm > /dev/null
+#     - docker push $NAMESPACE/php:5.3-fpm > /dev/null
+#     - docker tag $REGISTRY/php:5.3-fpm $REGISTRY/php:5.3-fpm-extra
+#     - docker push $REGISTRY/php:5.3-fpm-extra

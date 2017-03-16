@@ -32,7 +32,7 @@ Example with docker-compose :
         PHP__memory_limit:   '128M'
         PHP__post_max_size:  '50M'
         PHP__date.timezone:  '"Europe/Paris"'
-        
+
 ### Load PHP Extensions
 
 The PHP Extensions are load on start. Just add environment variable `PHP_php5enmod` with list of your extensions
@@ -48,6 +48,7 @@ Example with docker-compose :
 - php >= 5.3 : `bcmath gd gmp intl ldap mbstring mcrypt memcached mongo mysql mysqli pcntl pdo_mysql redis soap zip blackfire ftp sockets`
 - php >= 5.4 : `xdebug`
 - php >= 5.5 : `opcache`
+- php >= 5.6 : `zlib`
 
 
 ### Set your apache.conf
@@ -64,19 +65,19 @@ Example with docker-compose :
         HTTPD__DirectoryIndex: 'app.php'
 
 ### Load Apache modules
- 
+
 The apache modules are load on start. Just add environment variable `HTTPD_a2enmod` with list of your modules
 
 Example with docker-compose :
 
-    environment:    
+    environment:
         HTTPD_a2enmod:  'rewrite status expires'
-        
+
 Modules available :
 
     access_compat actions alias allowmethods asis auth_basic auth_digest auth_form authn_anon authn_core authn_dbd authn_dbm authn_file authn_socache authnz_fcgi authnz_ldap authz_core authz_dbd authz_dbm authz_groupfile authz_host authz_owner authz_user autoindex buffer cache cache_disk cache_socache cgi cgid charset_lite data dav dav_fs dav_lock dbd deflate dialup dir dump_io echo env expires ext_filter file_cache filter headers heartbeat heartmonitor ident include info lbmethod_bybusyness lbmethod_byrequests lbmethod_bytraffic lbmethod_heartbeat ldap log_debug log_forensic lua macro mime mime_magic mpm_event mpm_prefork mpm_worker negotiation php5 proxy proxy_ajp proxy_balancer proxy_connect proxy_express proxy_fcgi proxy_fdpass proxy_ftp proxy_html proxy_http proxy_scgi proxy_wstunnel ratelimit reflector remoteip reqtimeout request rewrite sed session session_cookie session_crypto session_dbd setenvif slotmem_plain slotmem_shm socache_dbm socache_memcache socache_shmcb speling ssl status substitute suexec unique_id userdir usertrack vhost_alias xml2enc
 
-Modules default enabled : 
+Modules default enabled :
 
     access_compat alias auth_basic authn_core authn_file authz_core authz_host authz_user autoindex deflate dir env filter mime mpm_prefork negotiation php5 rewrite setenvif status
 
@@ -91,7 +92,7 @@ Modules default enabled :
 Example with docker-compose :
 
     ...
-    environment:  
+    environment:
        MEMCACHED:                      'memcached_1:11211 memcached_2:11211'
        MEMCACHED_CONFIG:               'timeout=5&retry_interval=60'
        SMTP:                           'mailcatcher_1:25'
