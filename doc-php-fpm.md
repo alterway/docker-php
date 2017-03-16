@@ -32,7 +32,7 @@ Example with docker-compose :
         PHP__memory_limit:   '128M'
         PHP__post_max_size:  '50M'
         PHP__date.timezone:  '"Europe/Paris"'
-        
+
 ### Load PHP Extensions
 
 The PHP Extensions are load on start. Just add environment variable `PHP_php5enmod` with list of your extensions
@@ -47,13 +47,14 @@ Example with docker-compose :
 - php >= 5.3 : `bcmath gd gmp intl ldap mbstring mcrypt memcached mongo mysql mysqli pcntl pdo_mysql redis soap zip blackfire ftp sockets`
 - php >= 5.4 : `xdebug`
 - php >= 5.5 : `opcache`
+- php >= 5.6 : `zlib`
 
 ### Set your php-fpm.conf
 
 The php-fpm configuration is dynamic. Just add environment variable with prefix : `PHPFPM__` and `PHPFPM_GLOBAL__`.
 
 Example with docker-compose :
-    
+
      environment:
         PHPFPM_GLOBAL__pm: dynamic
         PHPFPM_GLOBAL__pm.max_children: 5
@@ -73,7 +74,7 @@ Example with docker-compose :
 Example with docker-compose :
 
     ...
-    environment:  
+    environment:
        MEMCACHED:                      'memcached_1:11211 memcached_2:11211'
        MEMCACHED_CONFIG:               'timeout=5&retry_interval=60'
        SMTP:                           'mailcatcher_1:25'
