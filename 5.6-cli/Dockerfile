@@ -55,7 +55,7 @@ RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h && \
     pecl install mongo && \
     pecl install memcached-2.2.0 && \
     pecl install redis && \
-    pecl install xdebug
+    pecl install xdebug-2.5.5
 
 ADD http://www.zlib.net/zlib-1.2.11.tar.gz /tmp/zlib.tar.gz
 RUN tar zxpf /tmp/zlib.tar.gz -C /tmp && \
