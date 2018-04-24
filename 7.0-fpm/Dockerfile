@@ -18,7 +18,6 @@ RUN apt-get update && \
         libcurl4-openssl-dev \
         libssl-dev \
         libsqlite3-dev \
-        php-pear \
         curl \
         ssmtp \
         mysql-client \
