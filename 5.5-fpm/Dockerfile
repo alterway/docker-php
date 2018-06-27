@@ -1,5 +1,5 @@
 FROM php:5.5-fpm
-MAINTAINER Alterway <iac@alterway.fr>
+LABEL maintainer="Alterway <iac@alterway.fr>"
 
 RUN apt-get update && \
     apt-get install -y \

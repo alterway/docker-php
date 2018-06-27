@@ -1,5 +1,5 @@
 FROM php:7.0-apache
-MAINTAINER Alterway <iac@alterway.fr>
+LABEL maintainer="Alterway <iac@alterway.fr>"
 
 RUN apt-get update && \
     apt-get install -y \
