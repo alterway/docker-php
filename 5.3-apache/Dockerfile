@@ -1,5 +1,5 @@
 FROM debian:wheezy
-MAINTAINER Alterway <iac@alterway.fr>
+LABEL maintainer="Alterway <iac@alterway.fr>"
 
 RUN apt-get update && \
     apt-get install -y ca-certificates curl librecode0 libsqlite3-0 libxml2 autoconf file g++ gcc libc-dev make pkg-config re2c apache2 apache2-mpm-prefork --no-install-recommends && \

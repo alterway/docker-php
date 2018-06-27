@@ -1,12 +1,12 @@
 FROM php:5.6-fpm
-MAINTAINER Alterway <iac@alterway.fr>
+LABEL maintainer="Alterway <iac@alterway.fr>"
 
 RUN apt-get update && \
     apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libmcrypt-dev \
-        libpng12-dev \
+        libpng-dev \
         libgmp-dev \
         libxml2-dev \
         zlib1g-dev \
@@ -17,7 +17,6 @@ RUN apt-get update && \
         libcurl4-openssl-dev \
         libssl-dev \
         libsqlite3-dev \
-        php-pear \
         curl \
         ssmtp \
         mysql-client \
