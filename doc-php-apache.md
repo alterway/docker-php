@@ -2,10 +2,11 @@
 
 ## Version available
 
+- Apache/2.4 - PHP/7.2 (docker tags: `7.2-apache`) - `docker pull alterway/php:7.2-apache`
 - Apache/2.4 - PHP/7.1 (docker tags: `7.1-apache`) - `docker pull alterway/php:7.1-apache`
 - Apache/2.4 - PHP/7.0 (docker tags: `7.0-apache`) - `docker pull alterway/php:7.0-apache`
-- Apache/2.4 - PHP/5.6 (docker tags: `5.6-apache`) - `docker pull alterway/php:5.6-apache`
-- Apache/2.4 - PHP/5.5 (docker tags: `5.5-apache`) - `docker pull alterway/php:5.5-apache`
+- Apache/2.4 - PHP/5.6 (docker tags: `5.6-apache`) - `docker pull alterway/php:5.6-apache` [DEPRECATED]
+- Apache/2.4 - PHP/5.5 (docker tags: `5.5-apache`) - `docker pull alterway/php:5.5-apache` [DEPRECATED]
 - Apache/2.4 - PHP/5.4 (docker tags: `5.4-apache`) - `docker pull alterway/php:5.4-apache` [DEPRECATED]
 - Apache/2.2 - PHP/5.3.29 (docker tags: `5.3-apache`) - `docker pull alterway/php:5.3-apache` [DEPRECATED]
 
@@ -41,11 +42,11 @@ Example with docker-compose :
 
     ...
     environment:
-        PHP_php5enmod: 'mcrypt memcached mysqli opcache'
+        PHP_php5enmod: 'memcached mysqli opcache'
 
 
 #### Extensions available
-- php >= 5.3 : `bcmath gd gmp intl ldap mbstring mcrypt memcached mongo mysql mysqli pcntl pdo_mysql redis soap zip blackfire ftp sockets`
+- php >= 5.3 : `bcmath gd gmp intl ldap mbstring memcached mongo mysql mysqli pcntl pdo_mysql redis soap zip blackfire ftp sockets`
 - php >= 5.4 : `xdebug`
 - php >= 5.5 : `opcache`
 - php >= 5.6 : `zlib`

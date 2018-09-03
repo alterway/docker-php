@@ -2,11 +2,12 @@
 
 ## Version available
 
+- PHP 7.2 (docker tags: `7.2-cli`) - `docker pull alterway/php:7.2-cli`
 - PHP 7.1 (docker tags: `7.1-cli`) - `docker pull alterway/php:7.1-cli`
 - PHP 7.0 (docker tags: `7.0-cli`) - `docker pull alterway/php:7.0-cli`
-- PHP 5.6 (docker tags: `5.6-cli`) - `docker pull alterway/php:5.6-cli`
-- PHP 5.5 (docker tags: `5.5-cli`) - `docker pull alterway/php:5.5-cli`
-- PHP 5.4 (docker tags: `5.4-cli`) - `docker pull alterway/php:5.4-cli`
+- PHP 5.6 (docker tags: `5.6-cli`) - `docker pull alterway/php:5.6-cli` [DEPRECATED]
+- PHP 5.5 (docker tags: `5.5-cli`) - `docker pull alterway/php:5.5-cli` [DEPRECATED]
+- PHP 5.4 (docker tags: `5.4-cli`) - `docker pull alterway/php:5.4-cli` [DEPRECATED]
 
 
 ## Presentation
@@ -56,10 +57,10 @@ Example with docker-compose :
 
     ...
     environment:
-        PHP_php5enmod: 'mcrypt memcached mysqli opcache'
+        PHP_php5enmod: 'memcached mysqli opcache'
 
 #### Extensions available
-- php >= 5.3 : `bcmath gd gmp intl ldap mbstring mcrypt memcached mongo mysql mysqli pcntl pdo_mysql redis soap zip blackfire ftp sockets`
+- php >= 5.3 : `bcmath gd gmp intl ldap mbstring memcached mongo mysql mysqli pcntl pdo_mysql redis soap zip blackfire ftp sockets`
 - php >= 5.4 : `xdebug`
 - php >= 5.5 : `opcache`
 - php >= 5.6 : `zlib`

@@ -8,6 +8,39 @@ before_script:
   - if [[ "$CI_BUILD_REF_NAME" != master ]]; then REGISTRY="$REGISTRY/$CI_BUILD_REF_NAME"; fi
   - NAMESPACE=$REGISTRY/library
 
+7.2-fpm:
+  stage: build
+  only:
+    - preprod
+    - master
+  script:
+    - docker build --pull -t $REGISTRY/php:7.2-fpm 7.2-fpm/ >> /dev/null
+    - docker push $REGISTRY/php:7.2-fpm > /dev/null
+    - docker tag $REGISTRY/php:7.2-fpm $NAMESPACE/php:7.2-fpm > /dev/null
+    - docker push $NAMESPACE/php:7.2-fpm > /dev/null
+
+7.2-apache:
+  stage: build
+  only:
+    - preprod
+    - master
+  script:
+    - docker build --pull -t $REGISTRY/php:7.2-apache 7.2-apache/ > /dev/null
+    - docker push $REGISTRY/php:7.2-apache > /dev/null
+    - docker tag $REGISTRY/php:7.2-apache $NAMESPACE/php:7.2-apache > /dev/null
+    - docker push $NAMESPACE/php:7.2-apache > /dev/null
+
+7.2-cli:
+  stage: build
+  only:
+    - preprod
+    - master
+  script:
+    - docker build --pull -t $REGISTRY/php:7.2-cli 7.2-cli/ > /dev/null
+    - docker push $REGISTRY/php:7.2-cli > /dev/null
+    - docker tag $REGISTRY/php:7.2-cli $NAMESPACE/php:7.2-cli > /dev/null
+    - docker push $NAMESPACE/php:7.2-cli > /dev/null
+
 7.1-alpine-cli:
   stage: build
   only:
