@@ -52,7 +52,7 @@ RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h && \
     docker-php-ext-install sockets && \
     pecl install mongo && \
     pecl install redis && \
-    pecl install xdebug && \
+    pecl install xdebug-2.5.5 && \
     pecl install memcached-2.2.0
 
 ADD http://www.zlib.net/zlib-1.2.11.tar.gz /tmp/zlib.tar.gz
