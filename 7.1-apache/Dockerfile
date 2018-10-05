@@ -1,12 +1,12 @@
 FROM php:7.1-apache
-MAINTAINER Alterway <iac@alterway.fr>
+LABEL maintainer="Alterway <iac@alterway.fr>"
 
 RUN apt-get update && \
     apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libmcrypt-dev \
-        libpng12-dev \
+        libpng-dev \
         libgmp-dev \
         libxml2-dev \
         zlib1g-dev \
@@ -18,7 +18,6 @@ RUN apt-get update && \
         libcurl4-openssl-dev \
         libssl-dev \
         libsqlite3-dev \
-        php-pear \
         curl \
         ssmtp \
         mysql-client \
@@ -35,7 +34,7 @@ RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h && \
     docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
     docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd && \
     docker-php-ext-configure mysqli --with-mysqli=mysqlnd && \
-    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/lib && \
+    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
     docker-php-ext-install pdo_mysql && \
     docker-php-ext-install mysqli && \
     docker-php-ext-install pdo_sqlite && \
