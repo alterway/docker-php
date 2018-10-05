@@ -1,6 +1,5 @@
 FROM php:7.1-fpm-alpine
-
-MAINTAINER Alterway <piko@alterway.fr>
+LABEL maintainer="Alterway <iac@alterway.fr>"
 
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.6/community" >> /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/v3.6/main" >> /etc/apk/repositories && \
@@ -56,7 +55,7 @@ RUN docker-php-ext-configure ldap && \
     docker-php-ext-install gmp
 
 ADD http://www.zlib.net/zlib-1.2.11.tar.gz /tmp/zlib.tar.gz
-ADD https://blackfire.io/api/v1/releases/probe/php/linux/amd64/56 /tmp/blackfire-probe.tar.gz
+ADD https://blackfire.io/api/v1/releases/probe/php/linux/amd64/71 /tmp/blackfire-probe.tar.gz
 RUN apk add --update --no-cache tar gcc libc-dev make && \
     tar zxpf /tmp/zlib.tar.gz -C /tmp && \
     cd /tmp/zlib-1.2.11 && \

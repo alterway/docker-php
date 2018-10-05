@@ -63,7 +63,7 @@ RUN tar zxpf /tmp/zlib.tar.gz -C /tmp && \
     rm -Rf /tmp/zlib-1.2.11 && \
     rm /tmp/zlib.tar.gz
 
-ADD https://blackfire.io/api/v1/releases/probe/php/linux/amd64/56 /tmp/blackfire-probe.tar.gz
+ADD https://blackfire.io/api/v1/releases/probe/php/linux/amd64/71 /tmp/blackfire-probe.tar.gz
 RUN tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp && \
     mv /tmp/blackfire-*.so `php -r "echo ini_get('extension_dir');"`/blackfire.so && \
     rm /tmp/blackfire-probe.tar.gz
