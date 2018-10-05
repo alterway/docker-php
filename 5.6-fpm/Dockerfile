@@ -47,13 +47,13 @@ RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h && \
     docker-php-ext-install gmp && \
     docker-php-ext-install bcmath && \
     docker-php-ext-install mbstring && \
+    docker-php-ext-install exif && \
     docker-php-ext-install zip && \
     docker-php-ext-install pcntl && \
     docker-php-ext-install ftp && \
     docker-php-ext-install sockets && \
-    docker-php-ext-install xsl && \
-    docker-php-ext-install exif
-
+    docker-php-ext-install xsl
+    
 RUN pecl install mongo && \
     pecl install memcached-2.2.0 && \
     pecl install redis && \

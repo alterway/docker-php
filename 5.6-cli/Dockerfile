@@ -18,7 +18,7 @@ RUN apt-get update && \
         libcurl4-openssl-dev \
         libssl-dev \
         libsqlite3-dev \
-        libgmp3-dev \
+        exiftool \
         curl \
         ssmtp \
         mysql-client \
@@ -39,7 +39,7 @@ RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h && \
     docker-php-ext-configure mysqli --with-mysqli=mysqlnd && \
     docker-php-ext-install mysqli && \
     docker-php-ext-install pdo_sqlite && \
-    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/lib && \
+    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/  && \
     docker-php-ext-install gd && \
     docker-php-ext-install soap && \
     docker-php-ext-install intl && \
@@ -47,12 +47,12 @@ RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h && \
     docker-php-ext-install gmp && \
     docker-php-ext-install bcmath && \
     docker-php-ext-install mbstring && \
+    docker-php-ext-install exif && \
     docker-php-ext-install zip && \
     docker-php-ext-install pcntl && \
     docker-php-ext-install ftp && \
     docker-php-ext-install sockets && \
-    docker-php-ext-install xsl && \
-    docker-php-ext-install exif
+    docker-php-ext-install xsl
 
 RUN pecl install mongo && \
     pecl install memcached-2.2.0 && \
