@@ -15,9 +15,11 @@ before_script:
     - master
   script:
     - docker build --pull -t $REGISTRY/php:7.1-cli-alpine 7.1-cli-alpine/ > /dev/null
-    - docker exec -i anchore_cli anchore analyze --image $REGISTRY/php:7.1-cli-alpine
-    - docker exec -i anchore_cli anchore gate --image $REGISTRY/php:7.1-cli-alpine
+#    - docker exec -i anchore_cli anchore analyze --image $REGISTRY/php:7.1-cli-alpine
+#    - docker exec -i anchore_cli anchore gate --image $REGISTRY/php:7.1-cli-alpine
     - docker push $REGISTRY/php:7.1-cli-alpine
+    - docker tag $REGISTRY/php:7.1-cli-alpine $NAMESPACE/php:7.1-cli-alpine > /dev/null
+    - docker push $NAMESPACE/php:7.1-cli-alpine > /dev/null
 
 
 7.1-alpine-fpm:
@@ -27,9 +29,11 @@ before_script:
     - master
   script:
     - docker build --pull -t $REGISTRY/php:7.1-fpm-alpine 7.1-fpm-alpine/ > /dev/null
-    - docker exec -i anchore_cli anchore analyze --image $REGISTRY/php:7.1-fpm-alpine
-    - docker exec -i anchore_cli anchore gate --image $REGISTRY/php:7.1-fpm-alpine
-    - docker push $REGISTRY/php:7.1-fpm-alpine
+#    - docker exec -i anchore_cli anchore analyze --image $REGISTRY/php:7.1-fpm-alpine
+#    - docker exec -i anchore_cli anchore gate --image $REGISTRY/php:7.1-fpm-alpine
+    - docker push $REGISTRY/php:7.1-fpm-alpine > /dev/null
+    - docker tag $REGISTRY/php:7.1-fpm-alpine $NAMESPACE/php:7.1-fpm-alpine > /dev/null
+    - docker push $NAMESPACE/php:7.1-fpm-alpine > /dev/null
 
 7.1-fpm:
   stage: build

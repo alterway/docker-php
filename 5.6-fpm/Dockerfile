@@ -9,6 +9,7 @@ RUN apt-get update && \
         libpng-dev \
         libgmp-dev \
         libxml2-dev \
+        libxslt-dev \
         zlib1g-dev \
         libncurses5-dev \
         libldap2-dev \
@@ -17,6 +18,7 @@ RUN apt-get update && \
         libcurl4-openssl-dev \
         libssl-dev \
         libsqlite3-dev \
+        exiftool \
         curl \
         ssmtp \
         mysql-client \
@@ -37,7 +39,7 @@ RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h && \
     docker-php-ext-configure mysqli --with-mysqli=mysqlnd && \
     docker-php-ext-install mysqli && \
     docker-php-ext-install pdo_sqlite && \
-    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/lib && \
+    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
     docker-php-ext-install gd && \
     docker-php-ext-install soap && \
     docker-php-ext-install intl && \
@@ -49,10 +51,13 @@ RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h && \
     docker-php-ext-install pcntl && \
     docker-php-ext-install ftp && \
     docker-php-ext-install sockets && \
-    pecl install mongo && \
+    docker-php-ext-install xsl && \
+    docker-php-ext-install exif
+
+RUN pecl install mongo && \
+    pecl install memcached-2.2.0 && \
     pecl install redis && \
-    pecl install xdebug && \
-    pecl install memcached-2.2.0
+    pecl install xdebug-2.5.5
 
 ADD http://www.zlib.net/zlib-1.2.11.tar.gz /tmp/zlib.tar.gz
 RUN tar zxpf /tmp/zlib.tar.gz -C /tmp && \
