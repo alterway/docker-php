@@ -1,5 +1,5 @@
 FROM php:5.5-cli
-MAINTAINER Alterway <iac@alterway.fr>
+LABEL maintainer="Alterway <iac@alterway.fr>"
 
 RUN apt-get update && \
     apt-get install -y \
@@ -52,6 +52,7 @@ RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h && \
     pecl install memcached-2.2.0 && \
     pecl install redis-3.1.0 && \
     pecl install xdebug-2.5.0
+
 
 ADD https://blackfire.io/api/v1/releases/probe/php/linux/amd64/55 /tmp/blackfire-probe.tar.gz
 RUN tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp && \
