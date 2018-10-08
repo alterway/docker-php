@@ -1,4 +1,4 @@
-FROM php:5.5-fpm
+FROM php:5.5-cli
 LABEL maintainer="Alterway <iac@alterway.fr>"
 
 RUN apt-get update && \
@@ -50,8 +50,9 @@ RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h && \
     docker-php-ext-install sockets && \
     pecl install mongo && \
     pecl install memcached-2.2.0 && \
-    pecl install redis && \
-    pecl install xdebug-2.5.5
+    pecl install redis-3.1.0 && \
+    pecl install xdebug-2.5.0
+
 
 ADD https://blackfire.io/api/v1/releases/probe/php/linux/amd64/55 /tmp/blackfire-probe.tar.gz
 RUN tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp && \
