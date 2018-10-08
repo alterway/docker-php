@@ -35,17 +35,17 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.6/community" >> /etc/apk/repos
     chmod a+rx /usr/local/bin/composer
 
 RUN docker-php-ext-configure ldap && \
+    docker-php-ext-install ldap && \
     docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd && \
-    docker-php-ext-configure mysqli --with-mysqli=mysqlnd && \
-    docker-php-ext-configure gd && \
     docker-php-ext-install pdo_mysql && \
+    docker-php-ext-configure mysqli --with-mysqli=mysqlnd && \
     docker-php-ext-install mysqli && \
     docker-php-ext-install pdo_sqlite && \
-    docker-php-ext-install ldap && \
+    docker-php-ext-configure gd && \
+    docker-php-ext-install gd && \
     docker-php-ext-install soap && \
     docker-php-ext-install intl && \
     docker-php-ext-install mcrypt && \
-    docker-php-ext-install gd && \
     docker-php-ext-install bcmath && \
     docker-php-ext-install mbstring && \
     docker-php-ext-install zip && \
