@@ -1,36 +1,37 @@
 #!/bin/bash
 set -e
 
-
 if [ "$USER" = "root" ]; then
 
     # set localtime
     ln -sf /usr/share/zoneinfo/$LOCALTIME /etc/localtime
 
     # secure path
-    chmod a-rwx -R $PHP_INI_DIR/conf.d/ /etc/ssmtp /usr/local/etc/php-fpm.d/
+    chmod a-rwx -R /etc/apache2/ $PHP_INI_DIR/ /etc/ssmtp
 fi
 
 #
 # functions
+
 function set_conf {
-    echo "$4">$2; IFSO=$IFS; IFS=$(echo -en "\n\b")
+    echo ''>$2; IFSO=$IFS; IFS=$(echo -en "\n\b")
     for c in `printenv|grep $1`; do echo "`echo $c|cut -d "=" -f1|awk -F"$1" '{print $2}'` $3 `echo $c|cut -d "=" -f2`" >> $2; done;
     IFS=$IFSO
 }
+
+#
+# APACHE
+
+if [ ! -d "$HTTPD__DocumentRoot" ]; then echo >&2 "[Error] Document Root Directory not exist (please create $HTTPD__DocumentRoot)"; exit 1; fi
+if [ "$HTTPD_a2enmod" != "" ]; then a2enmod $HTTPD_a2enmod > /dev/null; fi;
+set_conf "HTTPD__" "$HTTPD_CONF_DIR/40-user.conf" ""
 
 #
 # PHP
 
 echo "date.timezone = \"${LOCALTIME}\"" >> $PHP_INI_DIR/conf.d/00-default.ini
 if [ "$PHP_php5enmod" != "" ]; then docker-php-ext-enable $PHP_php5enmod > /dev/null 2>&1; fi;
-
-# Set php.ini
 set_conf "PHP__" "$PHP_INI_DIR/conf.d/40-user.ini" "="
-
-# Set phpfpm.conf
-set_conf "PHPFPM_GLOBAL__" "/usr/local/etc/php-fpm.d/40-user-global.conf" "=" "[global]"
-set_conf "PHPFPM__" "/usr/local/etc/php-fpm.d/41-user-pool.conf" "=" "[www]"
 
 #
 # docker links
@@ -73,7 +74,11 @@ if [ -n "$SMTP" ]; then
     sed -i "s/mailhub=.*/mailhub=${SMTP}/"  /etc/ssmtp/ssmtp.conf
 fi
 
-
 #
 # Run
-exec "$@"
+
+if [[ ! -z "$1" ]]; then
+    exec ${*}
+else
+    exec apache2-foreground
+fi
