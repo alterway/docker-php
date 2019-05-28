@@ -2,6 +2,7 @@
 
 ## Version available
 
+- Apache/2.4 - PHP/7.3 (docker tags: `7.3-apache`) - `docker pull alterway/php:7.3-apache`
 - Apache/2.4 - PHP/7.2 (docker tags: `7.2-apache`) - `docker pull alterway/php:7.2-apache`
 - Apache/2.4 - PHP/7.1 (docker tags: `7.1-apache`) - `docker pull alterway/php:7.1-apache`
 - Apache/2.4 - PHP/7.0 (docker tags: `7.0-apache`) - `docker pull alterway/php:7.0-apache`
