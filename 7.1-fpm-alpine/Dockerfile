@@ -31,7 +31,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.6/community" >> /etc/apk/repos
         icu-dev \
         libmemcached-dev \
         libcurl && \
-    wget https://getcomposer.org/download/1.2.4/composer.phar -O /usr/local/bin/composer && \
+    wget https://getcomposer.org/download/1.8.5/composer.phar -O /usr/local/bin/composer && \
     chmod a+rx /usr/local/bin/composer
 
 RUN docker-php-ext-configure ldap && \
