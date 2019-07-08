@@ -8,6 +8,17 @@ before_script:
   - if [[ "$CI_BUILD_REF_NAME" != master ]]; then REGISTRY="$REGISTRY/$CI_BUILD_REF_NAME"; fi
   - NAMESPACE=$REGISTRY/library
 
+7.3-fpm-posix:
+  stage: build
+  only:
+    - preprod
+    - master
+  script:
+    - docker build --pull -t $REGISTRY/php:7.3-fpm-posix 7.3-fpm-posix/ >> /dev/null
+    - docker push $REGISTRY/php:7.3-fpm-posix > /dev/null
+    - docker tag $REGISTRY/php:7.3-fpm-posix $NAMESPACE/php:7.3-fpm-posix > /dev/null
+    - docker push $NAMESPACE/php:7.3-fpm-posix > /dev/null
+
 7.3-fpm:
   stage: build
   only:
