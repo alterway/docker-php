@@ -26,7 +26,7 @@ function set_conf {
 function set_conf_posix {
     echo "$4">$2; IFSO=$IFS; IFS=$(echo -en "\n\b")
     
-    for c in `printenv|grep $1`; do echo "`echo $c|cut -d "=" -f1|awk -F"$1" '{print $2}' | gawk -F"__" '{print $1 "[" $2 "]"'}` $3 `echo $c|cut -d "=" -f2`" >> $2; done;
+    for c in `printenv|grep $1`; do echo "`echo $c|cut -d "=" -f1|awk -F"$1" '{print $2}' | awk -F"__" '{print $1 "[" $2 "]"'}` $3 `echo $c|cut -d "=" -f2`" >> $2; done;
     IFS=$IFSO
 }
 
