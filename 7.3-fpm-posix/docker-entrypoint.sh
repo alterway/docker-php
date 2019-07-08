@@ -13,10 +13,19 @@ fi
 
 #
 # functions
+# Syntaxe Posix for Array 
+
 function set_conf {
     echo "$4">$2; IFSO=$IFS; IFS=$(echo -en "\n\b")
     
-    #for c in `printenv|grep $1`; do echo "`echo $c|cut -d "=" -f1|awk -F"$1" '{print $2}'` $3 `echo $c|cut -d "=" -f2`" >> $2; done;
+    for c in `printenv|grep $1`; do echo "`echo $c|cut -d "=" -f1|awk -F"$1" '{print $2}'` $3 `echo $c|cut -d "=" -f2`" >> $2; done;
+
+    IFS=$IFSO
+}
+
+function set_conf_posix {
+    echo "$4">$2; IFSO=$IFS; IFS=$(echo -en "\n\b")
+    
     for c in `printenv|grep $1`; do echo "`echo $c|cut -d "=" -f1|awk -F"$1" '{print $2}' | gawk -F"__" '{print $1 "[" $2 "]"'}` $3 `echo $c|cut -d "=" -f2`" >> $2; done;
     IFS=$IFSO
 }
@@ -31,8 +40,8 @@ if [ "$PHP_php5enmod" != "" ]; then docker-php-ext-enable $PHP_php5enmod > /dev/
 set_conf "PHP__" "$PHP_INI_DIR/conf.d/40-user.ini" "="
 
 # Set phpfpm.conf
-set_conf "PHPFPM_GLOBAL__" "/usr/local/etc/php-fpm.d/40-user-global.conf" "=" "[global]"
-set_conf "PHPFPM__" "/usr/local/etc/php-fpm.d/41-user-pool.conf" "=" "[www]"
+set_conf_posix "PHPFPM_GLOBAL__" "/usr/local/etc/php-fpm.d/40-user-global.conf" "=" "[global]"
+set_conf_posix "PHPFPM__" "/usr/local/etc/php-fpm.d/41-user-pool.conf" "=" "[www]"
 
 if [ -f /usr/local/etc/php-fpm.d/www.conf ]; then 
   mv /usr/local/etc/php-fpm.d/www.conf /usr/local/etc/php-fpm.d/00-www.conf
