@@ -7,7 +7,7 @@ if [ "$USER" = "root" ]; then
     ln -sf /usr/share/zoneinfo/$LOCALTIME /etc/localtime
 
     # secure path
-    chmod a-rwx -R $PHP_INI_DIR/conf.d/ /etc/ssmtp
+    chmod a-rwx -R $PHP_INI_DIR/conf.d/
 fi
 
 #
@@ -38,11 +38,11 @@ elif [ -f $PHP_INI_DIR/conf.d/20-memcached.ini ]; then
     rm $PHP_INI_DIR/conf.d/20-memcached.ini
 fi
 
-# Deprecated - Set ssmtp server with link
+# Deprecated - Set msmtp server with link
 if [ -n "$SMTP_PORT_25_TCP_ADDR" ]; then
     echo "[WARNING] Deprecated - Future versions of Docker will not support links - you should remove them for forwards-compatibility."
-    echo 'sendmail_path = /usr/sbin/ssmtp -t' >> $PHP_INI_DIR/conf.d/00-default.ini
-    sed -i "s/mailhub=.*/mailhub=$SMTP_PORT_25_TCP_ADDR:$SMTP_PORT_25_TCP_PORT/"  /etc/ssmtp/ssmtp.conf
+    echo 'sendmail_path = /usr/bin/msmtp -t' >> $PHP_INI_DIR/conf.d/00-default.ini
+    echo -e "defaults \nauth           off \ntls            off \nlogfile        ~/.msmtp.log \naccount        mailcatcher \nhost           ${$SMTP_PORT_25_TCP_ADDR} \nport           ${$SMTP_PORT_25_TCP_PORT} \nauto_from on \naccount default : mailcatcher" > /etc/msmtprc
 fi
 
 # Set memcached session save handle
@@ -61,10 +61,10 @@ EOF
 
 fi
 
-# Set ssmtp server
+# Set msmtp server
 if [ -n "$SMTP" ]; then
-    echo 'sendmail_path = /usr/sbin/ssmtp -t' >> $PHP_INI_DIR/conf.d/00-default.ini
-    sed -i "s/mailhub=.*/mailhub=${SMTP}/"  /etc/ssmtp/ssmtp.conf
+    echo 'sendmail_path = /usr/bin/msmtp -t' >> $PHP_INI_DIR/conf.d/00-default.ini
+    echo -e "defaults \nauth           off \ntls            off \nlogfile        ~/.msmtp.log \naccount        mailcatcher \nhost           ${SMTP} \nport           ${SMTP_PORT:-25} \nauto_from on \naccount default : mailcatcher" > /etc/msmtprc
 fi
 
 
