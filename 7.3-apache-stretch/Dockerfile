@@ -1,4 +1,4 @@
-FROM php:7.3-cli
+FROM php:7.3-apache-stretch
 LABEL maintainer="Alterway <iac@alterway.fr>"
 
 RUN apt-get update && \
@@ -18,10 +18,9 @@ RUN apt-get update && \
         libssl-dev \
         libsqlite3-dev \
         libzip-dev \
-        libonig-dev \
         curl \
-        msmtp \
-        mariadb-client \
+        ssmtp \
+        mysql-client \
         git \
         subversion \
         wget && \
@@ -69,10 +68,18 @@ RUN tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp && \
     rm /tmp/blackfire-probe.tar.gz
 
 ENV LOCALTIME Europe/Paris
+ENV HTTPD_CONF_DIR /etc/apache2/conf-enabled/
+ENV HTTPD__DocumentRoot /var/www/html
+ENV HTTPD__LogFormat '"%a %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-agent}i\"" common'
 
 RUN rm $PHP_INI_DIR/conf.d/docker-php-ext* && \
-    echo 'sendmail_path = /usr/bin/msmtp -t' >> $PHP_INI_DIR/conf.d/00-default.ini && \
-    touch /etc/msmtprc && chmod a+w -R $PHP_INI_DIR/conf.d/ /etc/msmtprc
+    echo 'sendmail_path = /usr/sbin/ssmtp -t' >> $PHP_INI_DIR/conf.d/00-default.ini && \
+    sed -i "s/DocumentRoot.*/DocumentRoot \${HTTPD__DocumentRoot}/"  /etc/apache2/apache2.conf && \
+    echo 'ServerName ${HOSTNAME}' > $HTTPD_CONF_DIR/00-default.conf && \
+    echo 'ServerSignature Off' > /etc/apache2/conf-enabled/z-security.conf && \
+    echo 'ServerTokens Minimal' >> /etc/apache2/conf-enabled/z-security.conf && \
+    chmod a+w -R $HTTPD_CONF_DIR/ /etc/apache2/mods-enabled $PHP_INI_DIR/ && \
+    rm /etc/apache2/sites-enabled/000-default.conf
 
 COPY docker-entrypoint.sh /entrypoint.sh
 

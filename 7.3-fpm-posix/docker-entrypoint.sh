@@ -13,9 +13,31 @@ fi
 
 #
 # functions
+
+
 function set_conf {
     echo "$4">$2; IFSO=$IFS; IFS=$(echo -en "\n\b")
+    
     for c in `printenv|grep $1`; do echo "`echo $c|cut -d "=" -f1|awk -F"$1" '{print $2}'` $3 `echo $c|cut -d "=" -f2`" >> $2; done;
+
+    IFS=$IFSO
+}
+
+# Syntaxe Posix for Array and dot __env__ will do env[] and ___ will do .
+
+function set_conf_posix {
+    echo "$4">$2; IFSO=$IFS; IFS=$(echo -en "\n\b")
+    
+    for c in `printenv|grep $1`
+    do 
+      if [[ "${c,,}" == *"__env__"* ]] ;then
+        echo "`echo $c|cut -d "=" -f1|awk -F"$1" '{print $2}' | awk -F"__" '{print $1 "[" $2 "]"'}` $3 `echo $c|cut -d "=" -f2`" >> $2
+      elif [[ "${c,,}" == *"____"* ]] ;then
+        echo "`echo $c|cut -d "=" -f1|awk -F"$1" '{print $2}' | awk -F"__" '{print $1 "[" $2 "]"'}` $3 `echo $c|cut -d "=" -f2`" >> $2
+      else
+        echo "`echo $c|cut -d "=" -f1|awk -F"$1" '{print $2}'` $3 `echo $c|cut -d "=" -f2`" >> $2
+      fi
+    done
     IFS=$IFSO
 }
 
@@ -26,11 +48,13 @@ echo "date.timezone = \"${LOCALTIME}\"" >> $PHP_INI_DIR/conf.d/00-default.ini
 if [ "$PHP_php5enmod" != "" ]; then docker-php-ext-enable $PHP_php5enmod > /dev/null 2>&1; fi;
 
 # Set php.ini
-set_conf "PHP__" "$PHP_INI_DIR/conf.d/40-user.ini" "="
+set_conf_posix "PHP__" "$PHP_INI_DIR/conf.d/40-user.ini" "="
 
-# Set phpfpm.conf
-set_conf "PHPFPM_GLOBAL__" "/usr/local/etc/php-fpm.d/40-user-global.conf" "=" "[global]"
-set_conf "PHPFPM__" "/usr/local/etc/php-fpm.d/41-user-pool.conf" "=" "[www]"
+# Set phpfpm.conf 
+set_conf_posix "PHPFPM_GLOBAL__" "/usr/local/etc/php-fpm.d/40-user-global.conf" "=" "[global]"
+set_conf_posix "PHPFPM__" "/usr/local/etc/php-fpm.d/41-user-pool.conf" "=" "[www]"
+
+
 
 if [ -f /usr/local/etc/php-fpm.d/www.conf ]; then 
   mv /usr/local/etc/php-fpm.d/www.conf /usr/local/etc/php-fpm.d/00-www.conf
