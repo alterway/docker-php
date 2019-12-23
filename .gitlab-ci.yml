@@ -1,9 +1,6 @@
 stages:
   - build
 
-variables:
-  REGISTRY: hub.alterway.fr
-
 .build_push_template: &build_push_definition
   stage: build
   only:
