@@ -2,10 +2,11 @@
 
 ## Version available
 
+- PHP-FPM 7.4 (docker tags: `7.4-fpm`) - `docker pull alterway/php:7.4-fpm`
 - PHP-FPM 7.3 (docker tags: `7.3-fpm`) - `docker pull alterway/php:7.3-fpm`
 - PHP-FPM 7.2 (docker tags: `7.2-fpm`) - `docker pull alterway/php:7.2-fpm`
-- PHP-FPM 7.1 (docker tags: `7.1-fpm`) - `docker pull alterway/php:7.1-fpm`
-- PHP-FPM 7.0 (docker tags: `7.0-fpm`) - `docker pull alterway/php:7.0-fpm`
+- PHP-FPM 7.1 (docker tags: `7.1-fpm`) - `docker pull alterway/php:7.1-fpm` [DEPRECATED]
+- PHP-FPM 7.0 (docker tags: `7.0-fpm`) - `docker pull alterway/php:7.0-fpm` [DEPRECATED]
 - PHP-FPM 5.6 (docker tags: `5.6-fpm`) - `docker pull alterway/php:5.6-fpm` [DEPRECATED]
 - PHP-FPM 5.5 (docker tags: `5.5-fpm`) - `docker pull alterway/php:5.5-fpm` [DEPRECATED]
 - PHP-FPM 5.4 (docker tags: `5.4-fpm`) - `docker pull alterway/php:5.4-fpm` [DEPRECATED]

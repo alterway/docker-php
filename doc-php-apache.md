@@ -2,10 +2,11 @@
 
 ## Version available
 
+- Apache/2.4 - PHP/7.4 (docker tags: `7.4-apache`) - `docker pull alterway/php:7.4-apache`
 - Apache/2.4 - PHP/7.3 (docker tags: `7.3-apache`) - `docker pull alterway/php:7.3-apache`
 - Apache/2.4 - PHP/7.2 (docker tags: `7.2-apache`) - `docker pull alterway/php:7.2-apache`
-- Apache/2.4 - PHP/7.1 (docker tags: `7.1-apache`) - `docker pull alterway/php:7.1-apache`
-- Apache/2.4 - PHP/7.0 (docker tags: `7.0-apache`) - `docker pull alterway/php:7.0-apache`
+- Apache/2.4 - PHP/7.1 (docker tags: `7.1-apache`) - `docker pull alterway/php:7.1-apache` [DEPRECATED]
+- Apache/2.4 - PHP/7.0 (docker tags: `7.0-apache`) - `docker pull alterway/php:7.0-apache` [DEPRECATED]
 - Apache/2.4 - PHP/5.6 (docker tags: `5.6-apache`) - `docker pull alterway/php:5.6-apache` [DEPRECATED]
 - Apache/2.4 - PHP/5.5 (docker tags: `5.5-apache`) - `docker pull alterway/php:5.5-apache` [DEPRECATED]
 - Apache/2.4 - PHP/5.4 (docker tags: `5.4-apache`) - `docker pull alterway/php:5.4-apache` [DEPRECATED]

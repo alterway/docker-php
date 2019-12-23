@@ -52,6 +52,39 @@ before_script:
     - docker tag $REGISTRY/php:7.3-cli-stretch $NAMESPACE/php:7.3-cli-stretch > /dev/null
     - docker push $NAMESPACE/php:7.3-cli-stretch > /dev/null
 
+7.4-fpm:
+  stage: build
+  only:
+    - preprod
+    - master
+  script:
+    - docker build --pull -t $REGISTRY/php:7.4-fpm 7.4-fpm/ >> /dev/null
+    - docker push $REGISTRY/php:7.4-fpm > /dev/null
+    - docker tag $REGISTRY/php:7.4-fpm $NAMESPACE/php:7.4-fpm > /dev/null
+    - docker push $NAMESPACE/php:7.4-fpm > /dev/null
+
+7.4-apache:
+  stage: build
+  only:
+    - preprod
+    - master
+  script:
+    - docker build --pull -t $REGISTRY/php:7.4-apache 7.4-apache/ > /dev/null
+    - docker push $REGISTRY/php:7.4-apache > /dev/null
+    - docker tag $REGISTRY/php:7.4-apache $NAMESPACE/php:7.4-apache > /dev/null
+    - docker push $NAMESPACE/php:7.4-apache > /dev/null
+
+7.4-cli:
+  stage: build
+  only:
+    - preprod
+    - master
+  script:
+    - docker build --pull -t $REGISTRY/php:7.4-cli 7.4-cli/ > /dev/null
+    - docker push $REGISTRY/php:7.4-cli > /dev/null
+    - docker tag $REGISTRY/php:7.4-cli $NAMESPACE/php:7.4-cli > /dev/null
+    - docker push $NAMESPACE/php:7.4-cli > /dev/null
+
 7.3-fpm-posix:
   stage: build
   only:
