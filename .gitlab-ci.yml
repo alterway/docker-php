@@ -71,7 +71,7 @@ before_script:
 7.1-cli-alpine:
   <<: *build_push_definition
 
-php:7.1-fpm-alpine:
+7.1-fpm-alpine:
   <<: *build_push_definition
 
 7.1-fpm:
