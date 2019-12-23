@@ -1,4 +1,4 @@
-FROM php:7.1-apache
+FROM php:7.1-apache-stretch
 LABEL maintainer="Alterway <iac@alterway.fr>"
 
 RUN apt-get update && \
