@@ -4,7 +4,6 @@ stages:
 variables:
   REGISTRY: hub.alterway.fr
 
-
 .build_push_template: &build_push_definition
   stage: build
   only:
@@ -26,6 +25,15 @@ before_script:
   - if [[ "$CI_BUILD_REF_NAME"  = "master" ]]; then docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY; fi
   - NAMESPACE=$REGISTRY/library
 
+7.4-fpm:
+  <<: *build_push_definition
+
+7.4-apache:
+  <<: *build_push_definition
+
+7.4-cli:
+  <<: *build_push_definition
+
 7.3-fpm-posix-stretch:
   <<: *build_push_definition
   
@@ -36,15 +44,6 @@ before_script:
   <<: *build_push_definition
 
 7.3-cli-stretch:
-  <<: *build_push_definition
-
-7.4-fpm:
-  <<: *build_push_definition
-
-7.4-apache:
-  <<: *build_push_definition
-
-7.4-cli:
   <<: *build_push_definition
 
 7.3-fpm-posix:
