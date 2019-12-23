@@ -6,18 +6,26 @@ variables:
 
 before_script:
   - if [[ "$CI_BUILD_REF_NAME" != master ]]; then REGISTRY="$REGISTRY/$CI_BUILD_REF_NAME"; fi
+  - if [[ "$CI_BUILD_REF_NAME"  = "master" ]]; then docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY; fi
   - NAMESPACE=$REGISTRY/library
 
 7.3-fpm-posix-stretch:
   stage: build
+  variables:
+    VERSION: 7.3-fpm-posix-stretch
   only:
     - preprod
     - master
   script:
-    - docker build --pull -t $REGISTRY/php:7.3-fpm-posix-stretch 7.3-fpm-posix-stretch/ >> /dev/null
-    - docker push $REGISTRY/php:7.3-fpm-posix-stretch > /dev/null
-    - docker tag $REGISTRY/php:7.3-fpm-posix-stretch $NAMESPACE/php:7.3-fpm-posix-stretch > /dev/null
-    - docker push $NAMESPACE/php:7.3-fpm-posix-stretch > /dev/null
+    - docker build --pull -t $REGISTRY/php:$VERSION $VERSION/ >> /dev/null
+    - docker push $REGISTRY/php:$VERSION > /dev/null
+    - docker tag $REGISTRY/php:$VERSION $NAMESPACE/php:$VERSION > /dev/null
+    - docker push $NAMESPACE/php:$VERSION > /dev/null
+    - |
+         if [[ "$CI_BUILD_REF_NAME" = "master" ]]; then
+           docker tag $REGISTRY/php:$VERSION $CI_REGISTRY_IMAGE:$VERSION > /dev/null
+           docker push $CI_REGISTRY_IMAGE:$VERSION > /dev/null
+         fi
 
 7.3-fpm-stretch:
   stage: build
