@@ -1,4 +1,4 @@
-FROM php:7.3-cli
+FROM php:7.3-cli-stretch
 LABEL maintainer="Alterway <iac@alterway.fr>"
 
 RUN apt-get update && \
@@ -18,10 +18,9 @@ RUN apt-get update && \
         libssl-dev \
         libsqlite3-dev \
         libzip-dev \
-        libonig-dev \
         curl \
-        msmtp \
-        mariadb-client \
+        ssmtp \
+        mysql-client \
         git \
         subversion \
         wget && \
@@ -71,8 +70,8 @@ RUN tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp && \
 ENV LOCALTIME Europe/Paris
 
 RUN rm $PHP_INI_DIR/conf.d/docker-php-ext* && \
-    echo 'sendmail_path = /usr/bin/msmtp -t' >> $PHP_INI_DIR/conf.d/00-default.ini && \
-    touch /etc/msmtprc && chmod a+w -R $PHP_INI_DIR/conf.d/ /etc/msmtprc
+    echo 'sendmail_path = /usr/sbin/ssmtp -t' >> $PHP_INI_DIR/conf.d/00-default.ini && \
+    chmod a+w -R $PHP_INI_DIR/conf.d/ /etc/ssmtp
 
 COPY docker-entrypoint.sh /entrypoint.sh
 

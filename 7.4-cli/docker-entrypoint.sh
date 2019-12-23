@@ -1,43 +1,21 @@
 #!/bin/bash
 set -e
 
-
 if [ "$USER" = "root" ]; then
 
     # set localtime
     ln -sf /usr/share/zoneinfo/$LOCALTIME /etc/localtime
 
     # secure path
-    chmod a-rwx -R $PHP_INI_DIR/conf.d/ /usr/local/etc/php-fpm.d/
+    chmod a-rwx -R $PHP_INI_DIR/conf.d/
 fi
 
 #
 # functions
 
-
 function set_conf {
-    echo "$4">$2; IFSO=$IFS; IFS=$(echo -en "\n\b")
-    
+    echo ''>$2; IFSO=$IFS; IFS=$(echo -en "\n\b")
     for c in `printenv|grep $1`; do echo "`echo $c|cut -d "=" -f1|awk -F"$1" '{print $2}'` $3 `echo $c|cut -d "=" -f2`" >> $2; done;
-
-    IFS=$IFSO
-}
-
-# Syntaxe Posix for Array and dot __env__ will do env[] and ___ will do .
-
-function set_conf_posix {
-    echo "$4">$2; IFSO=$IFS; IFS=$(echo -en "\n\b")
-    
-    for c in `printenv|grep $1`
-    do 
-      if [[ "${c,,}" == *"__env__"* ]] ;then
-        echo "`echo $c|cut -d "=" -f1|awk -F"$1" '{print $2}' | awk -F"__" '{print $1 "[" $2 "]"'}` $3 `echo $c|cut -d "=" -f2`" >> $2
-      elif [[ "${c,,}" == *"____"* ]] ;then
-        echo "`echo $c|cut -d "=" -f1|awk -F"$1" '{print $2}' | awk -F"__" '{print $1 "[" $2 "]"'}` $3 `echo $c|cut -d "=" -f2`" >> $2
-      else
-        echo "`echo $c|cut -d "=" -f1|awk -F"$1" '{print $2}'` $3 `echo $c|cut -d "=" -f2`" >> $2
-      fi
-    done
     IFS=$IFSO
 }
 
@@ -46,19 +24,7 @@ function set_conf_posix {
 
 echo "date.timezone = \"${LOCALTIME}\"" >> $PHP_INI_DIR/conf.d/00-default.ini
 if [ "$PHP_php5enmod" != "" ]; then docker-php-ext-enable $PHP_php5enmod > /dev/null 2>&1; fi;
-
-# Set php.ini
-set_conf_posix "PHP__" "$PHP_INI_DIR/conf.d/40-user.ini" "="
-
-# Set phpfpm.conf 
-set_conf_posix "PHPFPM_GLOBAL__" "/usr/local/etc/php-fpm.d/40-user-global.conf" "=" "[global]"
-set_conf_posix "PHPFPM__" "/usr/local/etc/php-fpm.d/41-user-pool.conf" "=" "[www]"
-
-
-
-if [ -f /usr/local/etc/php-fpm.d/www.conf ]; then 
-  mv /usr/local/etc/php-fpm.d/www.conf /usr/local/etc/php-fpm.d/00-www.conf
-fi
+set_conf "PHP__" "$PHP_INI_DIR/conf.d/40-user.ini" "="
 
 #
 # docker links
@@ -75,7 +41,7 @@ fi
 # Deprecated - Set msmtp server with link
 if [ -n "$SMTP_PORT_25_TCP_ADDR" ]; then
     echo "[WARNING] Deprecated - Future versions of Docker will not support links - you should remove them for forwards-compatibility."
-    echo 'sendmail_path = /usr/bin/msmtp -t' >> $PHP_INI_DIR/conf.d/00-default.ini
+    echo 'sendmail_path = /usr/sbin/ssmtp -t' >> $PHP_INI_DIR/conf.d/00-default.ini
     echo -e "defaults \nauth           off \ntls            off \nlogfile        ~/.msmtp.log \naccount        mailcatcher \nhost           ${$SMTP_PORT_25_TCP_ADDR} \nport           ${$SMTP_PORT_25_TCP_PORT} \nauto_from on \naccount default : mailcatcher" > /etc/msmtprc
 fi
 
@@ -104,4 +70,9 @@ fi
 
 #
 # Run
-exec "$@"
+
+if [[ ! -z "$1" ]]; then
+    exec php ${*}
+else
+    exec php -h
+fi

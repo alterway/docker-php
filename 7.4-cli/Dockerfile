@@ -1,4 +1,4 @@
-FROM php:7.3-cli
+FROM php:7.4-cli
 LABEL maintainer="Alterway <iac@alterway.fr>"
 
 RUN apt-get update && \
@@ -26,7 +26,7 @@ RUN apt-get update && \
         subversion \
         wget && \
     rm -rf /var/lib/apt/lists/* && \
-    wget https://getcomposer.org/download/1.8.5/composer.phar -O /usr/local/bin/composer && \
+    wget https://getcomposer.org/download/1.9.1/composer.phar -O /usr/local/bin/composer && \
     chmod a+rx /usr/local/bin/composer
 
 RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h && \
@@ -39,7 +39,7 @@ RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h && \
     docker-php-ext-configure mysqli --with-mysqli=mysqlnd && \
     docker-php-ext-install mysqli && \
     docker-php-ext-install pdo_sqlite && \
-    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
+    docker-php-ext-configure gd --with-freetype && \
     docker-php-ext-install gd && \
     docker-php-ext-install soap && \
     docker-php-ext-install intl && \
@@ -63,7 +63,7 @@ RUN tar zxpf /tmp/zlib.tar.gz -C /tmp && \
     rm -Rf /tmp/zlib-1.2.11 && \
     rm /tmp/zlib.tar.gz
 
-ADD https://blackfire.io/api/v1/releases/probe/php/linux/amd64/73 /tmp/blackfire-probe.tar.gz
+ADD https://blackfire.io/api/v1/releases/probe/php/linux/amd64/74 /tmp/blackfire-probe.tar.gz
 RUN tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp && \
     mv /tmp/blackfire-*.so `php -r "echo ini_get('extension_dir');"`/blackfire.so && \
     rm /tmp/blackfire-probe.tar.gz

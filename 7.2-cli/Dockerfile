@@ -18,8 +18,8 @@ RUN apt-get update && \
         libssl-dev \
         libsqlite3-dev \
         curl \
-        ssmtp \
-        mysql-client \
+        msmtp \
+        mariadb-client \
         git \
         subversion \
         wget && \
@@ -69,8 +69,8 @@ RUN tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp && \
 ENV LOCALTIME Europe/Paris
 
 RUN rm $PHP_INI_DIR/conf.d/docker-php-ext* && \
-    echo 'sendmail_path = /usr/sbin/ssmtp -t' >> $PHP_INI_DIR/conf.d/00-default.ini && \
-    chmod a+w -R $PHP_INI_DIR/conf.d/ /etc/ssmtp
+    echo 'sendmail_path = /usr/bin/msmtp -t' >> $PHP_INI_DIR/conf.d/00-default.ini && \
+    touch /etc/msmtprc && chmod a+w -R $PHP_INI_DIR/conf.d/ /etc/msmtprc
 
 COPY docker-entrypoint.sh /entrypoint.sh
 
