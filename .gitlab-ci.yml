@@ -6,15 +6,19 @@ variables:
 
 
 .build_push_template: &build_push_definition
+  stage: build
+  only:
+    - preprod
+    - master
   script:
-    - docker build --pull -t $REGISTRY/php:$VERSION $VERSION/ >> /dev/null
-    - docker push $REGISTRY/php:$VERSION > /dev/null
-    - docker tag $REGISTRY/php:$VERSION $NAMESPACE/php:$VERSION > /dev/null
-    - docker push $NAMESPACE/php:$VERSION > /dev/null
+    - docker build --pull -t $REGISTRY/php:$CI_JOB_NAME $CI_JOB_NAME/ >> /dev/null
+    - docker push $REGISTRY/php:$CI_JOB_NAME > /dev/null
+    - docker tag $REGISTRY/php:$CI_JOB_NAME $NAMESPACE/php:$CI_JOB_NAME > /dev/null
+    - docker push $NAMESPACE/php:$CI_JOB_NAME > /dev/null
     - |
          if [[ "$CI_BUILD_REF_NAME" = "master" ]]; then
-           docker tag $REGISTRY/php:$VERSION $CI_REGISTRY_IMAGE:$VERSION > /dev/null
-           docker push $CI_REGISTRY_IMAGE:$VERSION > /dev/null
+           docker tag $REGISTRY/php:$CI_JOB_NAME $CI_REGISTRY_IMAGE:$CI_JOB_NAME > /dev/null
+           docker push $CI_REGISTRY_IMAGE:$CI_JOB_NAME > /dev/null
          fi
 
 before_script:
@@ -23,285 +27,79 @@ before_script:
   - NAMESPACE=$REGISTRY/library
 
 7.3-fpm-posix-stretch:
-  stage: build
-  variables:
-    VERSION: 7.3-fpm-posix-stretch
-  only:
-    - preprod
-    - master
   <<: *build_push_definition
   
-
 7.3-fpm-stretch:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:7.3-fpm-stretch 7.3-fpm-stretch/ >> /dev/null
-    - docker push $REGISTRY/php:7.3-fpm-stretch > /dev/null
-    - docker tag $REGISTRY/php:7.3-fpm-stretch $NAMESPACE/php:7.3-fpm-stretch > /dev/null
-    - docker push $NAMESPACE/php:7.3-fpm-stretch > /dev/null
+  <<: *build_push_definition
 
 7.3-apache-stretch:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:7.3-apache-stretch 7.3-apache-stretch/ > /dev/null
-    - docker push $REGISTRY/php:7.3-apache-stretch > /dev/null
-    - docker tag $REGISTRY/php:7.3-apache-stretch $NAMESPACE/php:7.3-apache-stretch > /dev/null
-    - docker push $NAMESPACE/php:7.3-apache-stretch > /dev/null
+  <<: *build_push_definition
 
 7.3-cli-stretch:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:7.3-cli-stretch 7.3-cli-stretch/ > /dev/null
-    - docker push $REGISTRY/php:7.3-cli-stretch > /dev/null
-    - docker tag $REGISTRY/php:7.3-cli-stretch $NAMESPACE/php:7.3-cli-stretch > /dev/null
-    - docker push $NAMESPACE/php:7.3-cli-stretch > /dev/null
+  <<: *build_push_definition
 
 7.4-fpm:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:7.4-fpm 7.4-fpm/ >> /dev/null
-    - docker push $REGISTRY/php:7.4-fpm > /dev/null
-    - docker tag $REGISTRY/php:7.4-fpm $NAMESPACE/php:7.4-fpm > /dev/null
-    - docker push $NAMESPACE/php:7.4-fpm > /dev/null
+  <<: *build_push_definition
 
 7.4-apache:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:7.4-apache 7.4-apache/ > /dev/null
-    - docker push $REGISTRY/php:7.4-apache > /dev/null
-    - docker tag $REGISTRY/php:7.4-apache $NAMESPACE/php:7.4-apache > /dev/null
-    - docker push $NAMESPACE/php:7.4-apache > /dev/null
+  <<: *build_push_definition
 
 7.4-cli:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:7.4-cli 7.4-cli/ > /dev/null
-    - docker push $REGISTRY/php:7.4-cli > /dev/null
-    - docker tag $REGISTRY/php:7.4-cli $NAMESPACE/php:7.4-cli > /dev/null
-    - docker push $NAMESPACE/php:7.4-cli > /dev/null
+  <<: *build_push_definition
 
 7.3-fpm-posix:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:7.3-fpm-posix 7.3-fpm-posix/ >> /dev/null
-    - docker push $REGISTRY/php:7.3-fpm-posix > /dev/null
-    - docker tag $REGISTRY/php:7.3-fpm-posix $NAMESPACE/php:7.3-fpm-posix > /dev/null
-    - docker push $NAMESPACE/php:7.3-fpm-posix > /dev/null
+  <<: *build_push_definition
 
 7.3-fpm:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:7.3-fpm 7.3-fpm/ >> /dev/null
-    - docker push $REGISTRY/php:7.3-fpm > /dev/null
-    - docker tag $REGISTRY/php:7.3-fpm $NAMESPACE/php:7.3-fpm > /dev/null
-    - docker push $NAMESPACE/php:7.3-fpm > /dev/null
+  <<: *build_push_definition
 
 7.3-apache:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:7.3-apache 7.3-apache/ > /dev/null
-    - docker push $REGISTRY/php:7.3-apache > /dev/null
-    - docker tag $REGISTRY/php:7.3-apache $NAMESPACE/php:7.3-apache > /dev/null
-    - docker push $NAMESPACE/php:7.3-apache > /dev/null
+  <<: *build_push_definition
 
 7.3-cli:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:7.3-cli 7.3-cli/ > /dev/null
-    - docker push $REGISTRY/php:7.3-cli > /dev/null
-    - docker tag $REGISTRY/php:7.3-cli $NAMESPACE/php:7.3-cli > /dev/null
-    - docker push $NAMESPACE/php:7.3-cli > /dev/null
+  <<: *build_push_definition
 
 7.2-fpm:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:7.2-fpm 7.2-fpm/ >> /dev/null
-    - docker push $REGISTRY/php:7.2-fpm > /dev/null
-    - docker tag $REGISTRY/php:7.2-fpm $NAMESPACE/php:7.2-fpm > /dev/null
-    - docker push $NAMESPACE/php:7.2-fpm > /dev/null
+  <<: *build_push_definition
 
 7.2-apache:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:7.2-apache 7.2-apache/ > /dev/null
-    - docker push $REGISTRY/php:7.2-apache > /dev/null
-    - docker tag $REGISTRY/php:7.2-apache $NAMESPACE/php:7.2-apache > /dev/null
-    - docker push $NAMESPACE/php:7.2-apache > /dev/null
+  <<: *build_push_definition
 
 7.2-cli:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:7.2-cli 7.2-cli/ > /dev/null
-    - docker push $REGISTRY/php:7.2-cli > /dev/null
-    - docker tag $REGISTRY/php:7.2-cli $NAMESPACE/php:7.2-cli > /dev/null
-    - docker push $NAMESPACE/php:7.2-cli > /dev/null
+  <<: *build_push_definition
 
-7.1-alpine-cli:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:7.1-cli-alpine 7.1-cli-alpine/ > /dev/null
-#    - docker exec -i anchore_cli anchore analyze --image $REGISTRY/php:7.1-cli-alpine
-#    - docker exec -i anchore_cli anchore gate --image $REGISTRY/php:7.1-cli-alpine
-    - docker push $REGISTRY/php:7.1-cli-alpine
-    - docker tag $REGISTRY/php:7.1-cli-alpine $NAMESPACE/php:7.1-cli-alpine > /dev/null
-    - docker push $NAMESPACE/php:7.1-cli-alpine > /dev/null
+7.1-cli-alpine:
+  <<: *build_push_definition
 
-
-7.1-alpine-fpm:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:7.1-fpm-alpine 7.1-fpm-alpine/ > /dev/null
-#    - docker exec -i anchore_cli anchore analyze --image $REGISTRY/php:7.1-fpm-alpine
-#    - docker exec -i anchore_cli anchore gate --image $REGISTRY/php:7.1-fpm-alpine
-    - docker push $REGISTRY/php:7.1-fpm-alpine > /dev/null
-    - docker tag $REGISTRY/php:7.1-fpm-alpine $NAMESPACE/php:7.1-fpm-alpine > /dev/null
-    - docker push $NAMESPACE/php:7.1-fpm-alpine > /dev/null
+php:7.1-fpm-alpine:
+  <<: *build_push_definition
 
 7.1-fpm:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:7.1-fpm 7.1-fpm/ > /dev/null
-    - docker push $REGISTRY/php:7.1-fpm > /dev/null
-    - docker tag $REGISTRY/php:7.1-fpm $NAMESPACE/php:7.1-fpm > /dev/null
-    - docker push $NAMESPACE/php:7.1-fpm > /dev/null
+  <<: *build_push_definition
 
 7.1-apache:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:7.1-apache 7.1-apache/ > /dev/null
-    - docker push $REGISTRY/php:7.1-apache > /dev/null
-    - docker tag $REGISTRY/php:7.1-apache $NAMESPACE/php:7.1-apache > /dev/null
-    - docker push $NAMESPACE/php:7.1-apache > /dev/null
+  <<: *build_push_definition
 
 7.1-cli:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:7.1-cli 7.1-cli/ > /dev/null
-    - docker push $REGISTRY/php:7.1-cli > /dev/null
-    - docker tag $REGISTRY/php:7.1-cli $NAMESPACE/php:7.1-cli > /dev/null
-    - docker push $NAMESPACE/php:7.1-cli > /dev/null
+  <<: *build_push_definition
 
 7.0-fpm:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:7.0-fpm 7.0-fpm/ >> /dev/null
-    - docker push $REGISTRY/php:7.0-fpm > /dev/null
-    - docker tag $REGISTRY/php:7.0-fpm $NAMESPACE/php:7.0-fpm > /dev/null
-    - docker push $NAMESPACE/php:7.0-fpm > /dev/null
+  <<: *build_push_definition
 
 7.0-apache:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:7.0-apache 7.0-apache/ > /dev/null
-    - docker push $REGISTRY/php:7.0-apache > /dev/null
-    - docker tag $REGISTRY/php:7.0-apache $NAMESPACE/php:7.0-apache > /dev/null
-    - docker push $NAMESPACE/php:7.0-apache > /dev/null
+  <<: *build_push_definition
 
 7.0-cli:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:7.0-cli 7.0-cli/ > /dev/null
-    - docker push $REGISTRY/php:7.0-cli > /dev/null
-    - docker tag $REGISTRY/php:7.0-cli $NAMESPACE/php:7.0-cli > /dev/null
-    - docker push $NAMESPACE/php:7.0-cli > /dev/null
+  <<: *build_push_definition
 
 5.6-fpm:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:5.6-fpm 5.6-fpm/ >> /dev/null
-    - docker push $REGISTRY/php:5.6-fpm > /dev/null
-    - docker tag $REGISTRY/php:5.6-fpm $NAMESPACE/php:5.6-fpm > /dev/null
-    - docker push $NAMESPACE/php:5.6-fpm > /dev/null
-    - docker tag $REGISTRY/php:5.6-fpm $REGISTRY/php:5.6-fpm-extra
-    - docker push $REGISTRY/php:5.6-fpm-extra
+  <<: *build_push_definition
 
 5.6-apache:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:5.6-apache 5.6-apache/ > /dev/null
-    - docker push $REGISTRY/php:5.6-apache > /dev/null
-    - docker tag $REGISTRY/php:5.6-apache $NAMESPACE/php:5.6-apache > /dev/null
-    - docker push $NAMESPACE/php:5.6-apache > /dev/null
+  <<: *build_push_definition
 
 5.6-cli:
-  stage: build
-  only:
-    - preprod
-    - master
-  script:
-    - docker build --pull -t $REGISTRY/php:5.6-cli 5.6-cli/ > /dev/null
-    - docker push $REGISTRY/php:5.6-cli > /dev/null
-    - docker tag $REGISTRY/php:5.6-cli $NAMESPACE/php:5.6-cli > /dev/null
-    - docker push $NAMESPACE/php:5.6-cli > /dev/null
+  <<: *build_push_definition
 
 # 5.5-fpm:
 #   stage: build
