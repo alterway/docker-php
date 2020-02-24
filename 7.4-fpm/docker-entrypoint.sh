@@ -73,7 +73,7 @@ fi
 
 # Set msmtp server
 if [ -n "$SMTP" ]; then
-    echo 'sendmail_path = /usr/sbin/msmtp -t' >> $PHP_INI_DIR/conf.d/00-default.ini
+    echo 'sendmail_path = /usr/bin/msmtp -t' >> $PHP_INI_DIR/conf.d/00-default.ini
     echo -e "defaults \nauth           off \ntls            off \nlogfile        ~/.msmtp.log \naccount        mailcatcher \nhost           ${SMTP} \nport           ${SMTP_PORT:-25} \nauto_from on \naccount default : mailcatcher" > /etc/msmtprc
 fi
 
