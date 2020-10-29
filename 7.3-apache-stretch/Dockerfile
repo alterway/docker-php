@@ -25,8 +25,9 @@ RUN apt-get update && \
         subversion \
         wget && \
     rm -rf /var/lib/apt/lists/* && \
-    wget https://getcomposer.org/download/1.8.5/composer.phar -O /usr/local/bin/composer && \
-    chmod a+rx /usr/local/bin/composer
+    wget https://getcomposer.org/download/1.10.16/composer.phar -O /usr/local/bin/composer && \
+    wget https://getcomposer.org/download/2.0.3/composer.phar -O /usr/local/bin/composer2 && \
+    chmod a+rx /usr/local/bin/composer /usr/local/bin/composer2
 
 RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h && \
     ln -s /usr/lib/x86_64-linux-gnu/libldap.so /usr/lib/libldap.so && \
