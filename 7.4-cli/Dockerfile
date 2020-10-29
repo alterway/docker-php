@@ -39,7 +39,7 @@ RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h && \
     docker-php-ext-configure mysqli --with-mysqli=mysqlnd && \
     docker-php-ext-install mysqli && \
     docker-php-ext-install pdo_sqlite && \
-    docker-php-ext-configure gd --with-freetype && \
+    docker-php-ext-configure gd --with-freetype --with-jpeg && \
     docker-php-ext-install gd && \
     docker-php-ext-install soap && \
     docker-php-ext-install intl && \
