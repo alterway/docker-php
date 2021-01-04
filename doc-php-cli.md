@@ -2,9 +2,10 @@
 
 ## Version available
 
+- PHP 8.0 (docker tags: `8.0-cli`) - `docker pull alterway/php:8.0-cli`
 - PHP 7.4 (docker tags: `7.4-cli`) - `docker pull alterway/php:7.4-cli`
 - PHP 7.3 (docker tags: `7.3-cli`) - `docker pull alterway/php:7.3-cli`
-- PHP 7.2 (docker tags: `7.2-cli`) - `docker pull alterway/php:7.2-cli`
+- PHP 7.2 (docker tags: `7.2-cli`) - `docker pull alterway/php:7.2-cli` [DEPRECATED]
 - PHP 7.1 (docker tags: `7.1-cli`) - `docker pull alterway/php:7.1-cli` [DEPRECATED]
 - PHP 7.0 (docker tags: `7.0-cli`) - `docker pull alterway/php:7.0-cli` [DEPRECATED]
 - PHP 5.6 (docker tags: `5.6-cli`) - `docker pull alterway/php:5.6-cli` [DEPRECATED]

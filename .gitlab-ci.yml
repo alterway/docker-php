@@ -22,6 +22,15 @@ before_script:
   - if [[ "$CI_BUILD_REF_NAME"  = "master" ]]; then docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY; fi
   - NAMESPACE=$REGISTRY/library
 
+8.0-fpm:
+  <<: *build_push_definition
+
+8.0-apache:
+  <<: *build_push_definition
+
+8.0-cli:
+  <<: *build_push_definition
+
 7.4-fpm:
   <<: *build_push_definition
 
@@ -53,46 +62,4 @@ before_script:
   <<: *build_push_definition
 
 7.3-cli:
-  <<: *build_push_definition
-
-7.2-fpm:
-  <<: *build_push_definition
-
-7.2-apache:
-  <<: *build_push_definition
-
-7.2-cli:
-  <<: *build_push_definition
-
-7.1-cli-alpine:
-  <<: *build_push_definition
-
-7.1-fpm-alpine:
-  <<: *build_push_definition
-
-7.1-fpm:
-  <<: *build_push_definition
-
-7.1-apache:
-  <<: *build_push_definition
-
-7.1-cli:
-  <<: *build_push_definition
-
-7.0-fpm:
-  <<: *build_push_definition
-
-7.0-apache:
-  <<: *build_push_definition
-
-7.0-cli:
-  <<: *build_push_definition
-
-5.6-fpm:
-  <<: *build_push_definition
-
-5.6-apache:
-  <<: *build_push_definition
-
-5.6-cli:
   <<: *build_push_definition
