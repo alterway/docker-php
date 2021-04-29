@@ -1,26 +1,38 @@
+variables:
+  # Debug and tracing.
+  #CI_DEBUG_TRACE: "true"
+  #GIT_CURL_VERBOSE: "1"
+  #GIT_DEBUG_LOOKUP: "1"
+  #GIT_TRACE: "1"
+  #GIT_TRACE_PACKET: "1"
+  #GIT_TRANSLOOP_DEBUG: "1"
+  #GIT_TRANSPORT_HELPER_DEBUG: "1"
+
+
 stages:
   - build
-
+  
 .build_push_template: &build_push_definition
   stage: build
   only:
     - preprod
     - master
   script:
-    - docker build --pull -t $REGISTRY/php:$CI_JOB_NAME $CI_JOB_NAME/ >> /dev/null
-    - docker push $REGISTRY/php:$CI_JOB_NAME > /dev/null
-    - docker tag $REGISTRY/php:$CI_JOB_NAME $NAMESPACE/php:$CI_JOB_NAME > /dev/null
-    - docker push $NAMESPACE/php:$CI_JOB_NAME > /dev/null
+    - docker build --pull -t "$NAMESPACE/php:${CI_JOB_NAME}" "${CI_JOB_NAME}/" 
+    - docker push "$NAMESPACE/php:${CI_JOB_NAME}"
     - |
          if [[ "$CI_BUILD_REF_NAME" = "master" ]]; then
-           docker tag $REGISTRY/php:$CI_JOB_NAME $CI_REGISTRY_IMAGE:$CI_JOB_NAME > /dev/null
-           docker push $CI_REGISTRY_IMAGE:$CI_JOB_NAME > /dev/null
+           docker tag  "$NAMESPACE/php:${CI_JOB_NAME}" "$CI_REGISTRY_IMAGE:${CI_JOB_NAME}"
+           docker push "$CI_REGISTRY_IMAGE:${CI_JOB_NAME}"
          fi
 
 before_script:
-  - if [[ "$CI_BUILD_REF_NAME" != master ]]; then REGISTRY="$REGISTRY/$CI_BUILD_REF_NAME"; fi
-  - if [[ "$CI_BUILD_REF_NAME"  = "master" ]]; then docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY; fi
-  - NAMESPACE=$REGISTRY/library
+  #- if [[ "$CI_BUILD_REF_NAME" != master ]]; then echo $AW_REGISTRY_PASSWORD | docker login -u "$AW_REGISTRY_USER" --password-stdin $AW_REGISTRY; AW_REGISTRY="$AW_REGISTRY/$CI_BUILD_REF_NAME"; fi
+  #- if [[ "$CI_BUILD_REF_NAME"  = "master" ]]; then docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY; fi
+  - echo $AW_REGISTRY_PASSWORD | docker login -u "$AW_REGISTRY_USER" --password-stdin $AW_REGISTRY
+  - echo $CI_REGISTRY_PASSWORD | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+
+  - export NAMESPACE=$AW_REGISTRY/library
 
 8.0-fpm:
   <<: *build_push_definition
