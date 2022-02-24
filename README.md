@@ -6,9 +6,10 @@
 
 Please see [README-php-cli.md](doc-php-cli.md)
 
+- PHP-CLI 8.1 (docker tags: `8.1-cli`) - `docker pull alterway/php:8.1-cli`
 - PHP-CLI 8.0 (docker tags: `8.0-cli`) - `docker pull alterway/php:8.0-cli`
 - PHP-CLI 7.4 (docker tags: `7.4-cli`) - `docker pull alterway/php:7.4-cli`
-- PHP-CLI 7.3 (docker tags: `7.3-cli`) - `docker pull alterway/php:7.3-cli`
+- PHP-CLI 7.3 (docker tags: `7.3-cli`) - `docker pull alterway/php:7.3-cli` [DEPRECATED]
 - PHP-CLI 7.2 (docker tags: `7.2-cli`) - `docker pull alterway/php:7.2-cli` [DEPRECATED]
 - PHP-CLI 7.1 (docker tags: `7.1-cli`) - `docker pull alterway/php:7.1-cli` [DEPRECATED]
 - PHP-CLI 7.0 (docker tags: `7.0-cli`) - `docker pull alterway/php:7.0-cli` [DEPRECATED]
@@ -20,9 +21,10 @@ Please see [README-php-cli.md](doc-php-cli.md)
 
 Please see [README-php-fpm.md](doc-php-fpm.md)
 
+- PHP-FPM 8.1 (docker tags: `8.1-fpm`) - `docker pull alterway/php:8.1-fpm`
 - PHP-FPM 8.0 (docker tags: `8.0-fpm`) - `docker pull alterway/php:8.0-fpm`
 - PHP-FPM 7.4 (docker tags: `7.4-fpm`) - `docker pull alterway/php:7.4-fpm`
-- PHP-FPM 7.3 (docker tags: `7.3-fpm`) - `docker pull alterway/php:7.3-fpm`
+- PHP-FPM 7.3 (docker tags: `7.3-fpm`) - `docker pull alterway/php:7.3-fpm` [DEPRECATED]
 - PHP-FPM 7.2 (docker tags: `7.2-fpm`) - `docker pull alterway/php:7.2-fpm` [DEPRECATED]
 - PHP-FPM 7.1 (docker tags: `7.1-fpm`) - `docker pull alterway/php:7.1-fpm` [DEPRECATED]
 - PHP-FPM 7.0 (docker tags: `7.0-fpm`) - `docker pull alterway/php:7.0-fpm` [DEPRECATED]
